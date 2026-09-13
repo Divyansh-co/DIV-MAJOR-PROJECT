@@ -1,6 +1,6 @@
 # VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
 
-**Live Demo:** [https://div-veritrust-ai.vercel.app](https://div-veritrust-ai.vercel.app)
+**Live Demo:** [https://frontend-binary-bandits4.vercel.app](https://frontend-binary-bandits4.vercel.app) (or [frontend-ll66tymc2-binary-bandits4.vercel.app](https://frontend-ll66tymc2-binary-bandits4.vercel.app))
 
 ## The Problem
 
@@ -59,4 +59,4 @@ This is a final-year engineering project, currently in active development. The c
 
 ## Author
 
-Built by Divyansh as a final-year B.Tech project, exploring how agentic AI systems and blockchain can work together to solve a real trust problem in digital identity verification.
+Built by Divyansh Mishra as a Major Project (B.Tech Final Year), exploring how agentic AI systems and blockchain can work together to solve a real trust problem in digital identity verification.
