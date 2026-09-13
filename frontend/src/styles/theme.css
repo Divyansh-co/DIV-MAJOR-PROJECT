@@ -1,0 +1,122 @@
+/* ==========================================================================
+   VeriTrust AI — Institutional Theme & Design Tokens
+   Designed for high-trust cybersecurity & blockchain KYC verification.
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-dark-0: #060B14;
+  --bg-dark-1: #0A1628;
+  --bg-dark-2: #0F1C2E;
+  --bg-gradient: radial-gradient(120% 120% at 50% 0%, #0F1C2E 0%, #0A1628 45%, #060B14 100%);
+
+  /* Card Surfaces & Glassmorphism */
+  --surface-card: rgba(17, 27, 46, 0.78);
+  --surface-card-hover: rgba(22, 35, 59, 0.88);
+  --surface-card-active: rgba(26, 42, 71, 0.92);
+  --surface-card-border: #1E2A44;
+  --surface-glass-blur: blur(16px);
+
+  /* Primary AI Accent (Electric Cyan) */
+  --accent-ai: #00E5FF;
+  --accent-ai-glow: rgba(0, 229, 255, 0.4);
+  --accent-ai-subtle: rgba(0, 229, 255, 0.12);
+
+  /* Secondary Blockchain Accent (Emerald) */
+  --accent-chain: #10B981;
+  --accent-chain-glow: rgba(16, 185, 129, 0.4);
+  --accent-chain-subtle: rgba(16, 185, 129, 0.12);
+
+  /* Warning / Risk Accent (Amber to Coral Gradient) */
+  --accent-risk-amber: #F59E0B;
+  --accent-risk-coral: #EF4444;
+  --accent-risk-gradient: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+  --accent-risk-glow: rgba(239, 68, 68, 0.35);
+  --accent-risk-subtle: rgba(239, 68, 68, 0.12);
+
+  /* Text Colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-dim: #475569;
+
+  /* Borders & Dividers */
+  --border-default: #1E293B;
+  --border-focus: #00E5FF;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* CTAs & Progress Elements (Subtle Cyan to Emerald Diagonal) */
+  --grad-cta: linear-gradient(135deg, #00E5FF 0%, #10B981 100%);
+  --grad-cta-hover: linear-gradient(135deg, #33EBFF 0%, #34D399 100%);
+  --grad-cta-glow: 0 0 28px rgba(0, 229, 255, 0.35);
+
+  /* Shadows & Glows */
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --shadow-glow-cyan: 0 0 20px -3px rgba(0, 229, 255, 0.35);
+  --shadow-glow-emerald: 0 0 20px -3px rgba(16, 185, 129, 0.35);
+  --shadow-glow-risk: 0 0 20px -3px rgba(239, 68, 68, 0.35);
+}
+
+/* Glass Surface Utility */
+.glass-surface {
+  background: var(--surface-card);
+  backdrop-filter: var(--surface-glass-blur);
+  -webkit-backdrop-filter: var(--surface-glass-blur);
+  border: 1px solid var(--surface-card-border);
+}
+
+.glass-surface-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-surface-hover:hover {
+  background: var(--surface-card-hover);
+  border-color: rgba(0, 229, 255, 0.3);
+  box-shadow: 0 12px 35px -8px rgba(0, 229, 255, 0.12);
+}
+
+/* Rotating Gradient Border for Magnetic Buttons & Featured Elements */
+@keyframes rotate-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-border {
+  animation: rotate-border 6s linear infinite;
+}
+
+/* Subtle Pulse Keyframe for Live Nodes */
+@keyframes radar-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+  }
+}
+
+.pulse-radar {
+  animation: radar-pulse 2.2s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E2A44;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00E5FF44;
+}

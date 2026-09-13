@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  blockchain:
+    build:
+      context: ./blockchain
+      dockerfile: Dockerfile
+    container_name: veritrust-blockchain
+    ports:
+      - "8545:8545"
+    networks:
+      - veritrust-net
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8545 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  agents:
+    build:
+      context: ./agents
+      dockerfile: Dockerfile
+    container_name: veritrust-agents
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - veritrust-net
+    healthcheck:
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: veritrust-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - AGENTS_SERVICE_URL=http://agents:8000
+      - BLOCKCHAIN_RPC_URL=http://blockchain:8545
+    depends_on:
+      - blockchain
+      - agents
+    networks:
+      - veritrust-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:4000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: veritrust-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - veritrust-net
+
+networks:
+  veritrust-net:
+    driver: bridge

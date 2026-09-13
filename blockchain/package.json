@@ -1,0 +1,16 @@
+{
+  "name": "veritrust-blockchain",
+  "version": "1.0.0",
+  "description": "Smart contracts for VeriTrust AI immutable KYC verification records",
+  "main": "hardhat.config.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.18"
+  }
+}
