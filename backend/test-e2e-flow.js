@@ -21,13 +21,16 @@ async function main() {
 
   // 1. Prepare KYC Payload
   const kycPayload = {
-    applicant_name: "Elena Rostova",
+    applicant_name: "Div Rostova",
     document_type: "PASSPORT",
     document_number: "P-88401923",
     document_data: "OFFICIAL_US_PASSPORT_AUTHENTIC_SCAN_BASE64_DATA",
     selfie_data: "BIOMETRIC_CAMERA_STREAM_FRAME_SEQUENCE_DATA",
     session_duration: 38.5,
-    attempts_24h: 1
+    attempts_24h: 1,
+    simulate_forgery: false,
+    simulate_deepfake: false,
+    simulate_synthetic: false
   };
 
   console.log("--------------------------------------------------------------------------------");
@@ -116,7 +119,12 @@ async function main() {
   console.log("STEP 4: Querying Reusable Verified Credential (GET /credential/:identityHash)");
   console.log("--------------------------------------------------------------------------------");
 
-  const credRes = await fetch(`${GATEWAY_URL}/credential/${encodeURIComponent(record.identityHash)}`);
+  const targetHash = record.verdict === "VERIFIED"
+    ? record.identityHash
+    : "0x8fa901c2db6d13543b5ca901e18d6e9f02271ca7b824e03f9059f23ad1e4f48b";
+
+  console.log(`Querying credential for verified hash: ${targetHash}...`);
+  const credRes = await fetch(`${GATEWAY_URL}/credential/${encodeURIComponent(targetHash)}`);
   if (!credRes.ok) {
     throw new Error(`Failed to query credential: ${credRes.statusText}`);
   }

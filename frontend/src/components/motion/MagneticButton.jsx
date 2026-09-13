@@ -105,12 +105,12 @@ export default function MagneticButton({
     >
       {/* Proximity Ambient Glow */}
       <div
-        className="absolute -inset-1 rounded-xl blur-lg pointer-events-none transition-opacity duration-200"
+        className="absolute -inset-1 rounded-full blur-lg pointer-events-none transition-opacity duration-200"
         style={{
           background:
             variant === "danger"
-              ? "radial-gradient(circle, rgba(244, 63, 94, 0.5) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(244, 63, 94, 0.42) 0%, rgba(52, 211, 153, 0.3) 70%)",
+              ? "radial-gradient(circle, rgba(255, 42, 109, 0.6) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(255, 42, 109, 0.5) 0%, rgba(255, 65, 108, 0.2) 70%)",
           opacity: disabled ? 0 : Math.max(proximityGlow, isHovered ? 0.85 : 0),
         }}
       />
@@ -127,34 +127,19 @@ export default function MagneticButton({
         whileTap={disabled ? {} : { scale: 0.98 }}
         transition={{ type: "spring", stiffness: 260, damping: 22 }}
         data-cursor={dataCursor || (variant === "danger" ? "risk" : "verified")}
-        className={`relative overflow-hidden group rounded-xl px-5 py-2.5 font-medium text-sm tracking-wide transition-all duration-200 ${
+        className={`relative overflow-hidden group rounded-full px-6 py-2.5 font-bold text-sm tracking-wide transition-all duration-200 ${
           disabled
             ? "opacity-50 cursor-not-allowed bg-slate-900/60 text-slate-500 border border-slate-800"
             : variant === "secondary"
-            ? "bg-[#140828]/90 text-slate-200 hover:text-white border border-[#351860] hover:border-rose-500/40 shadow-sm"
+            ? "bg-[#120d1c] text-slate-200 hover:text-white border border-[#2b1e3b] hover:border-[#ff2a6d]/50 shadow-sm"
             : variant === "danger"
-            ? "bg-gradient-to-r from-rose-600 to-red-600 text-white font-semibold border border-rose-500/40 shadow-lg"
-            : "bg-[#140828] text-white font-semibold shadow-lg shadow-rose-950/40"
+            ? "bg-gradient-to-r from-red-600 to-rose-600 text-white font-bold border border-red-500/40 shadow-lg shadow-red-950/50"
+            : "bg-gradient-to-r from-[#ff2a6d] to-[#ff416c] hover:from-[#ff3a79] hover:to-[#ff527b] text-white font-bold shadow-[0_0_20px_rgba(255,42,109,0.45)] border border-[#ff6584]/30"
         } ${className}`}
       >
-        {/* Rotating Conic Border Gradient on Hover for Primary variant */}
+        {/* Subtle Shine Wave on Hover */}
         {variant === "primary" && !disabled && (
-          <span className="absolute -inset-[2px] rounded-xl overflow-hidden pointer-events-none p-[1.5px]">
-            <span
-              className="absolute inset-[-100%] animate-rotate-border"
-              style={{
-                background:
-                  "conic-gradient(from 0deg at 50% 50%, #f43f5e 0%, #34d399 33%, #fb7185 66%, #10b981 100%)",
-              }}
-            />
-            {/* Inner fill mask */}
-            <span className="absolute inset-[1.5px] rounded-[10px] bg-[#0c0517] -z-0" />
-          </span>
-        )}
-
-        {/* Diagonal Ember-to-Emerald overlay gradient */}
-        {variant === "primary" && !disabled && (
-          <span className="absolute inset-0 bg-gradient-to-br from-rose-500/20 via-transparent to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <span className="absolute inset-0 bg-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         )}
 
         {/* Content Container */}

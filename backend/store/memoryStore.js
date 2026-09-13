@@ -15,11 +15,11 @@ class MemoryStore {
   seedUsers() {
     const demoUsers = [
       {
-        id: "usr_officer_sarah",
-        name: "Sarah Chen",
-        email: "officer@veritrust.ai",
+        id: "usr_officer_div",
+        name: "Div Mishra",
+        email: "div.mishra@veritrust.ai",
         passwordHash: this.hashPassword("password123"),
-        role: "COMPLIANCE_OFFICER",
+        role: "COMPLIANCE_LEAD",
         institution: "VeriTrust Global Security",
         createdAt: new Date(Date.now() - 86400000 * 30).toISOString()
       },
@@ -73,8 +73,8 @@ class MemoryStore {
     const seedRecords = [
       {
         id: "VERI-8921-A",
-        userId: "usr_officer_sarah",
-        applicantName: "Elena Rostova",
+        userId: "usr_officer_div",
+        applicantName: "Div Rostova",
         documentType: "PASSPORT",
         documentNumber: "P98234112",
         identityHash: "0x8fa901c2db6d13543b5ca901e18d6e9f02271ca7b824e03f9059f23ad1e4f48b",
@@ -117,8 +117,8 @@ class MemoryStore {
       },
       {
         id: "VERI-4102-B",
-        userId: "usr_officer_sarah",
-        applicantName: "Marcus Thorne",
+        userId: "usr_officer_div",
+        applicantName: "Div Thorne",
         documentType: "NATIONAL_ID",
         documentNumber: "USA-5510294",
         identityHash: "0xd42901a88bfe13459c0091e771ad624f115a901c771a2b3c4d5e6f7a8b9c0d1e",
@@ -161,8 +161,8 @@ class MemoryStore {
       },
       {
         id: "VERI-6719-C",
-        userId: "usr_officer_sarah",
-        applicantName: "Jonathan Reed",
+        userId: "usr_officer_div",
+        applicantName: "Div Reed",
         documentType: "DRIVERS_LICENSE",
         documentNumber: "DL-8831920",
         identityHash: "0x4522bc0a8e4649f1327059a9ab0e85ecace6bc3cd5ac0983b98b5be1cbb9fe11",
@@ -206,7 +206,7 @@ class MemoryStore {
       {
         id: "VERI-9941-D",
         userId: "usr_analyst_marcus",
-        applicantName: "Sarah Jenkins",
+        applicantName: "Div Sterling",
         documentType: "PASSPORT",
         documentNumber: "GBR-9481023",
         identityHash: "0xc62448185b932d9777ee55e374b2b25a44ba4c7fcca80045dfa4d407d44c91c7",
@@ -249,8 +249,8 @@ class MemoryStore {
       },
       {
         id: "VERI-3301-E",
-        userId: "usr_officer_sarah",
-        applicantName: "Agent 0x94B (Automated Sybil)",
+        userId: "usr_officer_div",
+        applicantName: "Div Sybil 0x94B",
         documentType: "NATIONAL_ID",
         documentNumber: "SYB-0004918",
         identityHash: "0x9188a104c8f921ea028374920182736451928374650192837465019283746501",

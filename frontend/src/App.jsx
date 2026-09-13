@@ -29,12 +29,12 @@ export default function App() {
   const [systemHealth, setSystemHealth] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Authentication State
+  // Authentication State (Default: Div Mishra, Compliance Lead)
   const [currentUser, setCurrentUser] = useState({
-    id: "usr_officer_sarah",
-    name: "Sarah Chen",
-    email: "officer@veritrust.ai",
-    role: "COMPLIANCE_OFFICER",
+    id: "usr_officer_div",
+    name: "Div Mishra",
+    email: "div.mishra@veritrust.ai",
+    role: "COMPLIANCE_LEAD",
     institution: "VeriTrust Global Security",
   });
   const [demoUsers, setDemoUsers] = useState([]);
@@ -129,7 +129,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#060B14] text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen flex flex-col bg-[#08070b] text-slate-100 relative selection:bg-[#ff2a6d]/30 selection:text-[#ff2a6d]">
       {/* 1. Custom Ambient Canvas Background */}
       <AmbientCanvas />
 

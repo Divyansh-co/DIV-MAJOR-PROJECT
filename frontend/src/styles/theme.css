@@ -1,28 +1,30 @@
 /* ==========================================================================
-   VeriTrust AI — Ember Pink, Emerald White & Obsidian Dark Purple Theme
-   Designed for premium institutional KYC verification with glowing cosmic aura.
+   VeriTrust AI — Hot Pink & Deep Onyx Theme
+   Matched to the reference design: vibrant #ff2a6d hot pink, deep pitch onyx,
+   subtle plum borders, and neon glowing active elements.
    ========================================================================== */
 
 :root {
-  /* Obsidian Dark Purple Background Void */
-  --bg-dark-0: #06020c;
-  --bg-dark-1: #0c0517;
-  --bg-dark-2: #140926;
-  --bg-gradient: radial-gradient(130% 120% at 50% 0%, #1c0d38 0%, #0d061a 45%, #06020c 100%);
+  /* Deep Onyx / Pitch Black Background */
+  --bg-dark-0: #08070c;
+  --bg-dark-1: #0d0b13;
+  --bg-dark-2: #14101d;
+  --bg-gradient: radial-gradient(130% 120% at 50% 0%, #1f0f2d 0%, #0d0b13 45%, #08070c 100%);
 
-  /* Obsidian Glass Card Surfaces */
-  --surface-card: rgba(20, 10, 38, 0.78);
-  --surface-card-hover: rgba(30, 15, 58, 0.88);
-  --surface-card-active: rgba(38, 19, 74, 0.94);
-  --surface-card-border: #33175c;
+  /* Sleek Onyx Card Surfaces */
+  --surface-card: rgba(18, 14, 25, 0.85);
+  --surface-card-hover: rgba(26, 20, 36, 0.92);
+  --surface-card-active: rgba(34, 26, 48, 0.96);
+  --surface-card-border: #291e36;
   --surface-glass-blur: blur(20px);
 
-  /* Primary AI Accent: Radiant Ember Pink */
-  --accent-ai: #f43f5e;
-  --accent-ai-glow: rgba(244, 63, 94, 0.48);
-  --accent-ai-subtle: rgba(244, 63, 94, 0.14);
+  /* Primary Accent: Hot Electric Pink / Neon Rose */
+  --accent-ai: #ff2a6d;
+  --accent-ai-hover: #ff417d;
+  --accent-ai-glow: rgba(255, 42, 109, 0.5);
+  --accent-ai-subtle: rgba(255, 42, 109, 0.15);
 
-  /* Secondary Blockchain Accent: Emerald White & Mint */
+  /* Secondary Accent: Emerald White & Mint */
   --accent-chain: #34d399;
   --accent-chain-glow: rgba(52, 211, 153, 0.45);
   --accent-chain-subtle: rgba(52, 211, 153, 0.14);
@@ -30,32 +32,32 @@
 
   /* Warning / Risk Accent */
   --accent-risk-amber: #fbbf24;
-  --accent-risk-coral: #f87171;
-  --accent-risk-gradient: linear-gradient(135deg, #fbbf24 0%, #f43f5e 100%);
-  --accent-risk-glow: rgba(244, 63, 94, 0.4);
-  --accent-risk-subtle: rgba(244, 63, 94, 0.14);
+  --accent-risk-coral: #ff2a6d;
+  --accent-risk-gradient: linear-gradient(135deg, #fbbf24 0%, #ff2a6d 100%);
+  --accent-risk-glow: rgba(255, 42, 109, 0.45);
+  --accent-risk-subtle: rgba(255, 42, 109, 0.15);
 
-  /* Text Colors: Crisp Emerald White & Rose Muted */
+  /* Text Colors: Crisp White & Muted Slate/Plum */
   --text-primary: #ffffff;
   --text-secondary: #e2e8f0;
-  --text-muted: #a699be;
-  --text-dim: #716287;
+  --text-muted: #9f93b5;
+  --text-dim: #6c6082;
 
   /* Borders & Dividers */
-  --border-default: #2d1452;
-  --border-focus: #f43f5e;
-  --border-subtle: rgba(244, 63, 94, 0.12);
+  --border-default: #291e36;
+  --border-focus: #ff2a6d;
+  --border-subtle: rgba(255, 42, 109, 0.15);
 
-  /* CTAs & Progress Elements: Ember Pink to Emerald White Gradient */
-  --grad-cta: linear-gradient(135deg, #f43f5e 0%, #10b981 100%);
-  --grad-cta-hover: linear-gradient(135deg, #fb7185 0%, #34d399 100%);
-  --grad-cta-glow: 0 0 32px rgba(244, 63, 94, 0.42);
+  /* CTAs & Progress Elements: Solid Hot Pink Gradient */
+  --grad-cta: linear-gradient(135deg, #ff2a6d 0%, #ff416c 100%);
+  --grad-cta-hover: linear-gradient(135deg, #ff3a7a 0%, #ff527a 100%);
+  --grad-cta-glow: 0 0 30px rgba(255, 42, 109, 0.5);
 
   /* Shadows & Glows */
-  --shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.75);
-  --shadow-glow-cyan: 0 0 24px -2px rgba(244, 63, 94, 0.4);
+  --shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+  --shadow-glow-cyan: 0 0 24px -2px rgba(255, 42, 109, 0.45);
   --shadow-glow-emerald: 0 0 24px -2px rgba(52, 211, 153, 0.4);
-  --shadow-glow-risk: 0 0 24px -2px rgba(244, 63, 94, 0.4);
+  --shadow-glow-risk: 0 0 24px -2px rgba(255, 42, 109, 0.45);
 }
 
 /* Obsidian Glass Surface Utility */

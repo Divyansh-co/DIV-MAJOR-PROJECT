@@ -48,10 +48,10 @@ export default function HistoryView({
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Top Header & Search / Filter Toolbar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1E2A44]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#261d33]">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
-            <Layers className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-xs font-mono text-[#ff2a6d]">
+            <Layers className="w-3.5 h-3.5 text-[#ff2a6d]" />
             <span>IMMUTABLE AUDIT TRAIL</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
@@ -68,14 +68,14 @@ export default function HistoryView({
             onClick={onStartVerify}
             className="px-4 py-2 text-xs"
           >
-            <Shield className="w-3.5 h-3.5 text-cyan-400" />
+            <Shield className="w-3.5 h-3.5" />
             New Verification
           </MagneticButton>
         </div>
       </div>
 
       {/* Filter and Search Controls */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0B1526]/80 p-3 rounded-2xl border border-[#1E2A44]">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0e0a16]/90 p-3 rounded-2xl border border-[#261d33]">
         {/* Search Bar */}
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-500 absolute left-3 top-2.5" />
@@ -84,7 +84,7 @@ export default function HistoryView({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by name, ID, or hash..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[#070D18] border border-[#1E2A44] text-xs font-mono text-white placeholder-slate-500 focus:border-cyan-400 focus:outline-none transition-colors"
+            className="w-full pl-9 pr-4 py-2 rounded-xl bg-[#08070b] border border-[#261d33] text-xs font-mono text-white placeholder-slate-500 focus:border-[#ff2a6d] focus:outline-none transition-colors"
           />
         </div>
 
@@ -99,8 +99,8 @@ export default function HistoryView({
                 onClick={() => setVerdictFilter(v)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all select-none ${
                   isActive
-                    ? "bg-[#14233C] text-cyan-300 font-semibold border border-cyan-500/40 shadow-sm"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-[#0E1B30]"
+                    ? "bg-[#ff2a6d] text-white font-semibold shadow-[0_0_12px_rgba(255,42,109,0.35)]"
+                    : "text-slate-400 hover:text-white hover:bg-[#1b1429]"
                 }`}
               >
                 {v}
@@ -111,10 +111,10 @@ export default function HistoryView({
       </div>
 
       {/* Main High-Density Table */}
-      <div className="rounded-2xl bg-[#0B1526]/80 border border-[#1E2A44] overflow-hidden backdrop-blur-xl">
+      <div className="rounded-2xl bg-[#0e0a16]/90 border border-[#261d33] overflow-hidden backdrop-blur-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-[#080E1A] border-b border-[#1E2A44] text-slate-400 text-[11px] uppercase tracking-wider">
+            <thead className="bg-[#08070b] border-b border-[#261d33] text-slate-400 text-[11px] uppercase tracking-wider">
               <tr>
                 <th className="py-3.5 px-4 font-semibold">Status</th>
                 <th className="py-3.5 px-4 font-semibold">Applicant Subject</th>
@@ -126,14 +126,14 @@ export default function HistoryView({
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-[#1E2A44]/60 text-slate-300">
+            <tbody className="divide-y divide-[#261d33]/60 text-slate-300">
               {filtered.length > 0 ? (
                 filtered.map((item) => {
                   const isVerified = item.verdict === "VERIFIED";
                   return (
                     <tr
                       key={item.id}
-                      className="hover:bg-[#111F36]/80 transition-colors group cursor-pointer"
+                      className="hover:bg-[#150f21]/80 transition-colors group cursor-pointer"
                       onClick={() => setSelectedRecord(item)}
                     >
                       <td className="py-3 px-4">
@@ -156,7 +156,7 @@ export default function HistoryView({
                         <span
                           className={`font-bold ${
                             item.trustScore >= 800
-                              ? "text-emerald-400"
+                              ? "text-[#ff2a6d]"
                               : item.trustScore >= 500
                               ? "text-amber-400"
                               : "text-rose-400"
@@ -171,7 +171,7 @@ export default function HistoryView({
                       </td>
 
                       <td className="py-3 px-4">
-                        <div className="text-emerald-400 flex items-center gap-1">
+                        <div className="text-[#ff7597] flex items-center gap-1">
                           <Database className="w-3 h-3" />
                           <span>Block #{item.blockchainTx?.blockNumber || 1}</span>
                         </div>
@@ -188,7 +188,7 @@ export default function HistoryView({
                               e.stopPropagation();
                               onSelectRecord(item);
                             }}
-                            className="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-950/80 hover:text-cyan-300 text-slate-300 border border-slate-700 hover:border-cyan-600 transition-colors text-[10px]"
+                            className="px-2.5 py-1 rounded bg-[#160f24] hover:bg-[#ff2a6d]/20 hover:text-[#ff7597] text-slate-300 border border-[#261d33] hover:border-[#ff2a6d]/50 transition-colors text-[10px]"
                           >
                             Inspect
                           </button>
@@ -199,7 +199,7 @@ export default function HistoryView({
                                 e.stopPropagation();
                                 onViewCredential(item.identityHash);
                               }}
-                              className="px-2 py-1 rounded bg-emerald-950/80 text-emerald-300 hover:bg-emerald-900 border border-emerald-800 text-[10px]"
+                              className="px-2 py-1 rounded bg-[#ff2a6d]/20 text-[#ff7597] hover:bg-[#ff2a6d]/30 border border-[#ff2a6d]/40 text-[10px]"
                               title="View Credential"
                             >
                               <Award className="w-3 h-3" />
@@ -225,15 +225,15 @@ export default function HistoryView({
       {/* Record Quick Inspection Drawer / Modal */}
       <AnimatePresence>
         {selectedRecord && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", stiffness: 280, damping: 24 }}
-              className="w-full max-w-xl rounded-2xl bg-[#0D182B] border border-[#1E2A44] p-6 shadow-2xl space-y-4"
+              className="w-full max-w-xl rounded-2xl bg-[#0e0a16] border border-[#261d33] p-6 shadow-2xl space-y-4"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-[#1E2A44]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#261d33]">
                 <div>
                   <h3 className="text-base font-bold text-white">
                     {selectedRecord.applicantName}
@@ -246,29 +246,29 @@ export default function HistoryView({
               </div>
 
               <div className="space-y-3 text-xs font-mono">
-                <div className="p-3 rounded-lg bg-[#070D18] border border-[#1E2A44]">
+                <div className="p-3 rounded-lg bg-[#08070b] border border-[#261d33]">
                   <span className="text-slate-500 block text-[10px]">PREIMAGE IDENTITY HASH</span>
-                  <span className="text-cyan-300 text-[11px] break-all select-all">
+                  <span className="text-[#ff7597] text-[11px] break-all select-all">
                     {selectedRecord.identityHash}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-2.5 rounded-lg bg-[#070D18] border border-[#1E2A44]">
+                  <div className="p-2.5 rounded-lg bg-[#08070b] border border-[#261d33]">
                     <span className="text-slate-500 block text-[10px]">DOCUMENT TYPE</span>
                     <span className="text-slate-200">
                       {selectedRecord.documentType} ({selectedRecord.documentNumber})
                     </span>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-[#070D18] border border-[#1E2A44]">
+                  <div className="p-2.5 rounded-lg bg-[#08070b] border border-[#261d33]">
                     <span className="text-slate-500 block text-[10px]">TRUST SCORE</span>
-                    <span className="text-emerald-400 font-bold">
+                    <span className="text-[#ff2a6d] font-bold">
                       {selectedRecord.trustScore} / 1000
                     </span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#070D18] border border-[#1E2A44]">
+                <div className="p-3 rounded-lg bg-[#08070b] border border-[#261d33]">
                   <span className="text-slate-500 block text-[10px] mb-1">REASONING SUMMARY</span>
                   <p className="text-slate-300 text-[11px] leading-relaxed">
                     {selectedRecord.reasoningTrail?.split("\n")[0] || "Verification processed."}
@@ -276,7 +276,7 @@ export default function HistoryView({
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#1E2A44] flex items-center justify-between">
+              <div className="pt-3 border-t border-[#261d33] flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setSelectedRecord(null)}
@@ -292,7 +292,7 @@ export default function HistoryView({
                       onSelectRecord(selectedRecord);
                       setSelectedRecord(null);
                     }}
-                    className="px-4 py-2 rounded-xl bg-cyan-950/80 border border-cyan-800 text-xs font-mono text-cyan-300 hover:bg-cyan-900 transition-colors flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff2a6d] to-[#ff416c] text-white shadow-[0_0_15px_rgba(255,42,109,0.35)] text-xs font-mono font-medium hover:brightness-110 transition-all flex items-center gap-1.5"
                   >
                     Open Full Result View <ArrowRight className="w-3 h-3" />
                   </button>

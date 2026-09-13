@@ -86,22 +86,22 @@ export default function ResultView({ report, onViewCredential, onNewVerification
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Top Header Strip */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#1E2A44]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#261d33]">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#8e92a4]">
             <span>VERIFICATION AUDIT RECEIPT</span>
             <span>•</span>
-            <span className="text-cyan-400 font-semibold">{id}</span>
+            <span className="text-[#ff2a6d] font-semibold">{id}</span>
             <span>•</span>
-            <span className="flex items-center gap-1 text-slate-500">
+            <span className="flex items-center gap-1 text-[#7e8194]">
               <Clock className="w-3 h-3" />
               {new Date(timestamp).toLocaleTimeString()}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1 font-heading">
             {applicantName}
           </h1>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
+          <p className="text-xs text-[#8e92a4] font-mono mt-0.5">
             {documentType} • Number: {documentNumber}
           </p>
         </div>
@@ -110,9 +110,9 @@ export default function ResultView({ report, onViewCredential, onNewVerification
           <button
             type="button"
             onClick={handleExportJson}
-            className="px-3.5 py-2 rounded-xl bg-[#0F1C2E] border border-[#1E2A44] hover:border-slate-500 text-xs text-slate-300 font-mono flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-[#0e0a16] border border-[#261d33] hover:border-[#ff2a6d]/50 text-xs text-slate-300 font-mono flex items-center gap-1.5 transition-colors"
           >
-            <Download className="w-3.5 h-3.5 text-cyan-400" />
+            <Download className="w-3.5 h-3.5 text-[#ff2a6d]" />
             Export Audit JSON
           </button>
 
@@ -123,7 +123,7 @@ export default function ResultView({ report, onViewCredential, onNewVerification
               dataCursor="verified"
               className="px-4 py-2 text-xs"
             >
-              <Award className="w-3.5 h-3.5 text-emerald-400" />
+              <Award className="w-3.5 h-3.5 text-white" />
               View Reusable Credential
             </MagneticButton>
           )}
@@ -134,9 +134,9 @@ export default function ResultView({ report, onViewCredential, onNewVerification
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Left (5 cols): Score Instrument */}
         <div className="lg:col-span-5">
-          <TiltCard glowColor={isVerified ? "emerald" : isRejected ? "risk" : "cyan"} className="p-6 h-full flex flex-col justify-between items-center">
-            <div className="w-full flex items-center justify-between pb-3 border-b border-[#1E2A44]">
-              <span className="text-xs font-mono text-slate-400">NEURAL CONSENSUS SCORE</span>
+          <TiltCard glowColor={isVerified ? "emerald" : "risk"} className="p-6 h-full flex flex-col justify-between items-center">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-[#261d33]">
+              <span className="text-xs font-mono text-[#8e92a4]">NEURAL CONSENSUS SCORE</span>
               <StatusBadge status={verdict} size="sm" />
             </div>
 
@@ -144,9 +144,9 @@ export default function ResultView({ report, onViewCredential, onNewVerification
               <ScoreGauge score={trustScore} verdict={verdict} size={190} />
             </div>
 
-            <div className="w-full pt-3 border-t border-[#1E2A44] text-[11px] font-mono text-center text-slate-400">
+            <div className="w-full pt-3 border-t border-[#261d33] text-[11px] font-mono text-center text-[#8e92a4]">
               Primary Attributed Verifier:{" "}
-              <span className="text-cyan-400 font-semibold">{verifierAgent || "MultiAgentOrchestrator"}</span>
+              <span className="text-[#ff2a6d] font-semibold">{verifierAgent || "MultiAgentOrchestrator"}</span>
             </div>
           </TiltCard>
         </div>
@@ -155,7 +155,7 @@ export default function ResultView({ report, onViewCredential, onNewVerification
         <div className="lg:col-span-7">
           <TiltCard glowColor="emerald" className="p-6 h-full flex flex-col justify-between" dataCursor="chain">
             <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#1E2A44]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#261d33]">
                 <div className="flex items-center gap-2">
                   <Database className="w-4 h-4 text-emerald-400" />
                   <h3 className="text-sm font-bold text-white font-mono uppercase tracking-wider">
@@ -169,24 +169,24 @@ export default function ResultView({ report, onViewCredential, onNewVerification
 
               <div className="mt-4 space-y-3 font-mono text-xs">
                 {/* 32-byte SHA-256 Preimage Hash */}
-                <div className="p-3 rounded-xl bg-[#080E1A] border border-[#1E2A44]">
+                <div className="p-3 rounded-xl bg-[#0e0a16] border border-[#261d33]">
                   <span className="text-slate-500 block text-[10px]">
                     SHA-256 ZERO-PII PREIMAGE IDENTITY HASH
                   </span>
-                  <span className="text-cyan-300 font-semibold break-all text-[11px] select-all">
+                  <span className="text-[#ff80a6] font-semibold break-all text-[11px] select-all">
                     {identityHash || "0x9f8231...8831"}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-2.5 rounded-lg bg-[#080E1A] border border-[#1E2A44]">
+                  <div className="p-2.5 rounded-lg bg-[#0e0a16] border border-[#261d33]">
                     <span className="text-slate-500 block text-[10px]">TRANSACTION HASH</span>
                     <span className="text-slate-200 text-[11px] break-all">
                       {blockchainTx?.txHash || "0x4b7e88...a210"}
                     </span>
                   </div>
 
-                  <div className="p-2.5 rounded-lg bg-[#080E1A] border border-[#1E2A44]">
+                  <div className="p-2.5 rounded-lg bg-[#0e0a16] border border-[#261d33]">
                     <span className="text-slate-500 block text-[10px]">BLOCK NUMBER</span>
                     <span className="text-emerald-400 font-semibold text-[11px]">
                       Block #{blockchainTx?.blockNumber || 1}
@@ -194,7 +194,7 @@ export default function ResultView({ report, onViewCredential, onNewVerification
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-[#080E1A] border border-[#1E2A44] flex items-center justify-between">
+                <div className="p-2.5 rounded-lg bg-[#0e0a16] border border-[#261d33] flex items-center justify-between">
                   <div>
                     <span className="text-slate-500 block text-[10px]">TAMPER REJECTION GUARANTEE</span>
                     <span className="text-slate-300 text-[11px]">
@@ -207,14 +207,14 @@ export default function ResultView({ report, onViewCredential, onNewVerification
             </div>
 
             {isVerified && (
-              <div className="mt-4 pt-3 border-t border-[#1E2A44] flex items-center justify-between text-xs font-mono">
+              <div className="mt-4 pt-3 border-t border-[#261d33] flex items-center justify-between text-xs font-mono">
                 <span className="text-emerald-400 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Reusable Credential Issued
                 </span>
                 <button
                   type="button"
                   onClick={() => onViewCredential(identityHash)}
-                  className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                  className="text-[#ff2a6d] hover:text-[#ff6584] flex items-center gap-1 font-semibold"
                 >
                   Inspect JWT Credential <ArrowRight className="w-3.5 h-3.5" />
                 </button>

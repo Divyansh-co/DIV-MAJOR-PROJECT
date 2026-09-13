@@ -123,12 +123,12 @@ function optionalAuth(req, res, next) {
   }
 
   // Default to primary demo user if no token provided so unauthenticated requests still function smoothly
-  const defaultUser = memoryStore.getUserByEmail("officer@veritrust.ai");
+  const defaultUser = memoryStore.getUserByEmail("div.mishra@veritrust.ai") || memoryStore.getUserByEmail("officer@veritrust.ai");
   req.user = defaultUser || {
-    id: "usr_officer_sarah",
-    name: "Sarah Chen",
-    email: "officer@veritrust.ai",
-    role: "COMPLIANCE_OFFICER",
+    id: "usr_officer_div",
+    name: "Div Mishra",
+    email: "div.mishra@veritrust.ai",
+    role: "COMPLIANCE_LEAD",
     institution: "VeriTrust Global Security"
   };
   next();

@@ -65,20 +65,20 @@ export default function AmbientCanvas() {
       const count = isMobile ? 16 : Math.min(52, Math.max(30, Math.floor((width * height) / 26000)));
 
       for (let i = 0; i < count; i++) {
-        // Distribute between Ember Pink (~55%) and Emerald White (~45%)
-        const isEmber = Math.random() < 0.55;
+        // Hot Pink (#ff2a6d) & Luminous Rose nodes matched to screenshot
+        const isPrimaryPink = Math.random() < 0.7;
         nodes.push({
           x: Math.random() * width,
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * (isMobile ? 0.22 : 0.38),
           vy: (Math.random() - 0.5) * (isMobile ? 0.22 : 0.38),
-          baseRadius: isMobile ? 1.3 : Math.random() * 1.8 + 1.2,
-          radius: 1.5,
+          baseRadius: isMobile ? 1.4 : Math.random() * 2.0 + 1.2,
+          radius: 1.6,
           alpha: Math.random() * 0.45 + 0.35,
-          // Ember Pink (244, 63, 94) vs Emerald White (236, 253, 245 / 52, 211, 153)
-          color: isEmber ? "244, 63, 94" : "236, 253, 245",
-          glowColor: isEmber ? "251, 113, 133" : "52, 211, 153",
-          isEmber,
+          // Hot Pink (255, 42, 109) vs Soft Luminous Pink (255, 117, 151)
+          color: isPrimaryPink ? "255, 42, 109" : "255, 117, 151",
+          glowColor: isPrimaryPink ? "255, 65, 108" : "255, 150, 180",
+          isEmber: true,
           highlight: 0,
         });
       }
@@ -89,7 +89,7 @@ export default function AmbientCanvas() {
     const render = (time) => {
       ctx.clearRect(0, 0, width, height);
 
-      // Deep Obsidian Purple Atmospheric Radial Wash
+      // Deep Obsidian Atmospheric Radial Wash with Subtle Plum/Pink Hue
       const bgGrad = ctx.createRadialGradient(
         width * 0.5,
         height * 0.3,
@@ -98,24 +98,23 @@ export default function AmbientCanvas() {
         height * 0.5,
         Math.max(width, height) * 0.85
       );
-      bgGrad.addColorStop(0, "rgba(28, 13, 56, 0.45)");
-      bgGrad.addColorStop(0.5, "rgba(16, 7, 33, 0.25)");
-      bgGrad.addColorStop(1, "rgba(6, 2, 12, 0)");
+      bgGrad.addColorStop(0, "rgba(32, 10, 26, 0.35)");
+      bgGrad.addColorStop(0.5, "rgba(16, 8, 18, 0.18)");
+      bgGrad.addColorStop(1, "rgba(8, 7, 12, 0)");
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, width, height);
 
-      // Periodic Neural Consensus Wave Pulses (Alternating Ember Pink & Emerald White)
+      // Periodic Hot Pink Pulse Shockwaves
       const waveInterval = isMobile ? 11000 : 7500;
       if (time - lastWaveTime > waveInterval) {
         lastWaveTime = time;
-        const isEmberWave = Math.random() > 0.4;
         waves.push({
           x: width * 0.5 + (Math.random() - 0.5) * (width * 0.35),
           y: height * 0.45 + (Math.random() - 0.5) * (height * 0.3),
           radius: 10,
           maxRadius: Math.max(width, height) * 0.85,
           alpha: 0.32,
-          color: isEmberWave ? "244, 63, 94" : "52, 211, 153",
+          color: "255, 42, 109",
           speed: isMobile ? 1.5 : 1.9,
         });
       }

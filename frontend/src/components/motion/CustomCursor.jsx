@@ -97,19 +97,19 @@ export default function CustomCursor() {
 
   if (!isVisible) return null;
 
-  // Contextual color variables (Default: Radiant Ember Pink, Verified: Emerald White, Risk: Vivid Rose)
-  let mainColor = "rgb(244, 63, 94)";
-  let glowColor = "rgba(244, 63, 94, 0.5)";
-  let dotColor = "#f43f5e";
+  // Contextual color variables (Default: Hot Pink #ff2a6d, Verified: Emerald, Risk: Vivid Rose)
+  let mainColor = "rgb(255, 42, 109)";
+  let glowColor = "rgba(255, 42, 109, 0.55)";
+  let dotColor = "#ff2a6d";
 
   if (cursorType === "verified") {
     mainColor = "rgb(52, 211, 153)";
     glowColor = "rgba(52, 211, 153, 0.55)";
     dotColor = "#34d399";
   } else if (cursorType === "risk") {
-    mainColor = "rgb(251, 113, 133)";
-    glowColor = "rgba(244, 63, 94, 0.6)";
-    dotColor = "#f43f5e";
+    mainColor = "rgb(255, 42, 109)";
+    glowColor = "rgba(255, 42, 109, 0.7)";
+    dotColor = "#ff2a6d";
   }
 
   return (

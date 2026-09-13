@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   Shield,
   Activity,
@@ -12,12 +13,13 @@ import {
 } from "lucide-react";
 
 /**
- * Header — Spaced & Free Top Navigation Bar
- * Theme: Ember Pink & Emerald White on Obsidian Dark Purple
- * Features:
- * - Generous, airy horizontal and vertical whitespace
- * - Floating segmented navigation with ember-to-emerald luminous accents
- * - Clean status indicators & multi-tenant demo profile switcher
+ * Header — Clean, Spaced Top Navigation Bar
+ * Theme: Obsidian Black & Vibrant Hot Pink (#ff2a6d)
+ * Matched to reference design:
+ * - VT logo box with hot pink border and text
+ * - "VeriTrust IDENTITY PLATFORM" branding
+ * - Rounded solid hot pink active tab pill with glow
+ * - Circular "DM" avatar with Divyansh Mishra / Compliance Lead
  */
 export default function Header({
   activeView,
@@ -33,93 +35,72 @@ export default function Header({
   const isChainOnline = systemHealth?.blockchain?.connected ?? true;
 
   const navItems = [
-    { id: "dashboard", label: "Command Center", icon: Activity },
+    { id: "dashboard", label: "Dashboard", icon: Activity },
     { id: "verify", label: "Verify Identity", icon: Shield },
     { id: "result", label: "Result & Proof", icon: FileCheck2, disabled: !hasActiveReport },
-    { id: "history", label: "Audit Ledger", icon: History },
+    { id: "history", label: "History", icon: History },
     { id: "credential", label: "Credential Vault", icon: Award },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#2b144d]/70 bg-[#090314]/85 backdrop-blur-2xl transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full border-b border-[#20182b]/80 bg-[#08070b]/90 backdrop-blur-2xl transition-all duration-300">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 h-20 flex items-center justify-between gap-6">
         
-        {/* 1. Brand Identity (Spacious & Clean) */}
+        {/* 1. Brand Identity (Matched to Reference Screenshot: LD LLD Practice DESIGN PLATFORM) */}
         <div
           onClick={() => setActiveView("dashboard")}
-          className="flex items-center gap-4 cursor-pointer select-none group flex-shrink-0"
+          className="flex items-center gap-3.5 cursor-pointer select-none group flex-shrink-0"
         >
-          {/* Glowing Emblem */}
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-rose-500/50 to-emerald-400/50 rounded-2xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
-            <div className="relative w-11 h-11 rounded-xl bg-[#0e061e] border border-rose-500/40 p-0.5 flex items-center justify-center text-rose-400 group-hover:text-emerald-300 transition-colors shadow-lg shadow-black/60">
-              <Shield className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-            </div>
+          {/* Box Logo with Hot Pink Border */}
+          <div className="relative w-10 h-10 rounded-xl bg-[#0e0a16] border border-[#ff2a6d]/70 flex items-center justify-center text-[#ff2a6d] font-mono font-bold text-sm shadow-[0_0_15px_rgba(255,42,109,0.25)] group-hover:border-[#ff2a6d] group-hover:shadow-[0_0_20px_rgba(255,42,109,0.45)] transition-all">
+            VT
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2.5">
-              <span className="text-lg font-bold text-white tracking-tight font-sans">
-                VeriTrust<span className="text-rose-400">.AI</span>
-              </span>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-gradient-to-r from-rose-950/90 to-[#1a0c33] text-rose-200 border border-rose-500/30 uppercase tracking-wide">
-                Major Project
-              </span>
-            </div>
-            <div className="text-[11px] font-mono text-slate-300 -mt-0.5 hidden sm:flex items-center gap-2">
-              <span className="text-emerald-100/90 font-medium">Divyansh Mishra</span>
-              <span className="text-slate-600">•</span>
-              <span className="text-slate-400">Agentic KYC & Blockchain Consensus</span>
-            </div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-lg font-bold text-white tracking-tight font-heading">
+              VeriTrust
+            </span>
+            <span className="text-[10px] font-mono font-bold tracking-wider text-[#ff2a6d] uppercase">
+              IDENTITY PLATFORM
+            </span>
           </div>
         </div>
 
-        {/* 2. Bespoke Floating Command Dock with Distinct Geometric Active Indicator */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-[#0f051e]/90 p-1.5 rounded-2xl border border-[#351860]/90 shadow-2xl shadow-black/60 relative">
-          {navItems.map((item, idx) => {
+        {/* 2. Sleek Center Navigation with Hot Pink Solid Active Pill (Matched to Screenshot) */}
+        <nav className="hidden md:flex items-center gap-2 bg-[#0e0a16]/80 p-1.5 rounded-full border border-[#221a30]/80 shadow-2xl relative">
+          {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeView === item.id;
-            const indexStr = `0${idx + 1}`;
             return (
               <button
                 key={item.id}
                 type="button"
                 disabled={item.disabled}
                 onClick={() => setActiveView(item.id)}
-                className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono tracking-wide transition-all duration-300 select-none ${
+                className={`relative flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-sans tracking-wide transition-all duration-200 select-none ${
                   isActive
-                    ? "text-white font-bold bg-gradient-to-r from-rose-950/80 via-[#230d42] to-emerald-950/70 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.25)]"
+                    ? "text-white font-bold z-10"
                     : item.disabled
                     ? "text-slate-600 cursor-not-allowed opacity-35"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]"
+                    : "text-[#9ca3af] hover:text-white"
                 }`}
               >
-                {/* Active Geometric Pip Indicator */}
+                {/* Active Hot Pink Glowing Pill Background */}
                 {isActive && (
                   <motion.div
-                    layoutId="activeNavPip"
-                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-5 h-1 bg-gradient-to-r from-rose-400 via-purple-300 to-emerald-400 rounded-full shadow-[0_0_10px_#f43f5e]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 bg-gradient-to-r from-[#ff2a6d] to-[#ff416c] rounded-full shadow-[0_0_20px_rgba(255,42,109,0.45)] -z-0"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
 
-                <span
-                  className={`text-[9px] font-bold px-1.5 py-0.5 rounded transition-colors ${
-                    isActive
-                      ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
-                      : "text-slate-600 bg-black/30"
-                  }`}
-                >
-                  {indexStr}
-                </span>
-
-                <Icon
-                  className={`w-3.5 h-3.5 transition-colors ${
-                    isActive ? "text-rose-400" : "text-slate-500"
-                  }`}
-                />
-                <span className="font-heading font-semibold text-[11px] tracking-normal">
-                  {item.label}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Icon
+                    className={`w-3.5 h-3.5 transition-colors ${
+                      isActive ? "text-white" : "text-slate-400"
+                    }`}
+                  />
+                  <span>{item.label}</span>
                 </span>
               </button>
             );
@@ -161,38 +142,39 @@ export default function Header({
             </div>
           </div>
 
-          {/* User Auth Profile Dropdown */}
+          {/* User Auth Profile Dropdown (Matched to Screenshot DM circular avatar) */}
           <div className="relative">
             <button
               type="button"
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#140828] hover:bg-[#1f0d3d] border border-[#351860] transition-all duration-200 text-xs font-mono text-slate-200 shadow-md shadow-black/40 hover:border-rose-500/40"
+              className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-[#0e0a16] hover:bg-[#191024] border border-[#261d33] transition-all duration-200 text-xs text-slate-200 shadow-md hover:border-[#ff2a6d]/50"
             >
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-rose-500 to-emerald-400 p-[1px]">
-                <div className="w-full h-full rounded-[7px] bg-[#0c0517] flex items-center justify-center text-rose-300 text-[10px] font-bold">
-                  {currentUser?.name?.charAt(0) || "U"}
-                </div>
+              {/* Circular Pink Accent Avatar */}
+              <div className="w-8 h-8 rounded-full border border-[#ff2a6d]/80 bg-[#190c1e] flex items-center justify-center text-[#ff2a6d] font-mono font-bold text-xs shadow-[0_0_10px_rgba(255,42,109,0.3)]">
+                DM
               </div>
               <div className="hidden sm:block text-left">
-                <div className="text-[11px] font-semibold text-white leading-tight">
-                  {currentUser?.name || "Demo Officer"}
+                <div className="text-xs font-bold text-white leading-tight">
+                  {currentUser?.name || "Divyansh Mishra"}
                 </div>
-                <div className="text-[9px] text-slate-400 truncate max-w-[110px]">
-                  {currentUser?.role?.replace("_", " ") || "COMPLIANCE"}
+                <div className="text-[10px] text-[#8e92a4] truncate max-w-[120px]">
+                  {currentUser?.role === "COMPLIANCE_OFFICER" || currentUser?.role === "COMPLIANCE_LEAD"
+                    ? "Compliance Lead"
+                    : currentUser?.role?.replace("_", " ") || "Compliance Lead"}
                 </div>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" />
+              <ChevronDown className="w-3 h-3 text-[#8e92a4] transition-transform duration-200" />
             </button>
 
             {/* Dropdown Menu */}
             {userMenuOpen && (
-              <div className="absolute right-0 mt-3 w-72 rounded-2xl bg-[#0f061e] border border-[#3e1c70] shadow-2xl p-2.5 z-50 text-xs font-mono space-y-1.5 backdrop-blur-2xl">
-                <div className="px-3.5 py-2.5 border-b border-[#2d1452] text-[10px] text-slate-400">
-                  <span className="text-rose-400/90 uppercase block font-bold tracking-wider">
+              <div className="absolute right-0 mt-3 w-72 rounded-2xl bg-[#0d0915] border border-[#2b1f3d] shadow-2xl p-2.5 z-50 text-xs font-mono space-y-1.5 backdrop-blur-2xl">
+                <div className="px-3.5 py-2.5 border-b border-[#221830] text-[10px] text-slate-400">
+                  <span className="text-[#ff2a6d] uppercase block font-bold tracking-wider">
                     ACTIVE SESSION
                   </span>
                   <div className="text-white font-semibold font-sans text-sm mt-0.5">
-                    {currentUser?.name}
+                    {currentUser?.name || "Divyansh Mishra"}
                   </div>
                   <div className="text-emerald-300 text-[11px]">{currentUser?.email}</div>
                   <div className="text-slate-400 text-[10px] flex items-center gap-1.5 mt-1">
