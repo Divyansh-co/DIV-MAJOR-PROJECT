@@ -1,191 +1,50 @@
-# VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
-### 🎓 Major Project by Divyansh Mishra
+VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
+The Problem
 
-[![Major Project](https://img.shields.io/badge/Major%20Project-Divyansh%20Mishra-00E5FF?style=for-the-badge&logo=github&logoColor=black)](https://github.com/Divyansh-co/DIV-MAJOR-PROJECT)
-[![Consensus](https://img.shields.io/badge/Consensus-v1.2%20Tri--Agent-10B981?style=for-the-badge)]()
-[![Blockchain](https://img.shields.io/badge/Audit%20Ledger-Ethereum%20Solidity-6366F1?style=for-the-badge&logo=ethereum&logoColor=white)]()
+KYC (Know Your Customer) verification is one of the most exploited weak points in digital banking and fintech onboarding today. As deepfake generation tools have become cheaper and more accessible, fraudsters are no longer just forging documents — they're generating fake faces, cloned voices, and synthetic identities that can pass traditional liveness checks.
 
-An institutional-grade verification platform combining autonomous multi-modal AI agents with on-chain Ethereum audit anchoring. Designed to detect generative AI deepfakes, synthetic identities, and forged documents in automated KYC pipelines without storing raw PII on-chain.
+Most existing KYC systems rely on a single verification layer (usually document OCR + a basic face match) and store results in a centralized database that can be silently altered after the fact. That leaves two gaps:
 
----
+No system cross-checks multiple independent signals before deciding if an identity is real.
+Once a verification decision is made, there's no tamper-proof way to prove it wasn't changed later — which matters a lot for compliance audits.
 
-## 1. Problem Statement
+VeriTrust AI is my attempt at addressing both gaps in one system.
 
-Automated KYC verification systems face an existential challenge from generative AI:
-1. **Diffusion & GAN Face-Swapping**: Attackers inject deepfake video streams into browser video feeds using virtual cameras or loop injection, defeating single-frame selfie checks.
-2. **Document Tampering**: Tools like Photoshop and generative inpainting produce spliced IDs with inconsistent JPEG compression artifacts and kerning irregularities that pass standard OCR.
-3. **Sybil Script Automation**: Headless browsers with programmatic inputs mimic human onboarding flows at scale.
-4. **Centralized PII Vulnerability**: Storing identity documents and biometric images in centralized databases creates permanent breach liabilities under GDPR, CCPA, and BIPA.
+What It Does
 
-**VeriTrust AI** resolves this by executing a concurrent tri-agent detection pipeline, synthesizing a cryptographic reasoning consensus, and committing a zero-PII 32-byte SHA-256 preimage hash to an Ethereum smart contract.
+VeriTrust AI runs identity verification through three independent AI agents, each specializing in a different type of fraud signal, and then anchors the final decision on a blockchain so it can never be silently altered.
 
----
+The three agents:
 
-## 2. Architecture Overview
+Document Forgery Agent — analyzes uploaded ID documents for tampering signs like DPI/resolution inconsistencies across regions, font irregularities, and metadata mismatches.
+Liveness & Deepfake Agent — analyzes a short video/selfie clip for deepfake tells: blink pattern irregularities, unnatural facial boundary artifacts, and frame-to-frame inconsistencies.
+Behavioral Trust Agent — looks at session-level signals (typing cadence, mouse movement entropy, device/IP consistency) to catch bot-driven or scripted verification attempts.
 
-```
- ┌────────────────────────────────────────────────────────────────────────┐
- │                      FRONTEND (React + Vite + Tailwind)                │
- │    • Custom Ambient Canvas Mesh   • 3D Tilt Cards    • Magnetic CTAs   │
- │    • Real-Time Stage HUD          • Reusable Verifiable Credential     │
- └───────────────────────────────────┬────────────────────────────────────┘
-                                     │ HTTP REST (JSON / Base64)
-                                     ▼
- ┌────────────────────────────────────────────────────────────────────────┐
- │                   API GATEWAY (Node.js + Express)                      │
- │    • JWT Authentication & Tenant Isolation (SARAH / MARCUS)            │
- │    • Input Validation & Rate Limiting                                  │
- │    • SHA-256 Preimage Computation: SHA256(DOC:...::TRAIL:...)          │
- └──────────────┬──────────────────────────────────────────┬──────────────┘
-                │                                          │
-                │ Async Inference Request                  │ ethers.js v6
-                ▼                                          ▼
- ┌──────────────────────────────┐        ┌────────────────────────────────┐
- │ AGENTS SERVICE (FastAPI)     │        │ BLOCKCHAIN LEDGER (Hardhat)    │
- │                              │        │                                │
- │ • DocumentForgeryAgent       │        │ IdentityVerification.sol       │
- │   - Laplacian Sharpness      │        │ • identityHash (bytes32)       │
- │   - ELA Splicing Analysis    │        │ • trustScore (0-1000)          │
- │   - Font Kerning Jitter      │        │ • verdict (VERIFIED/REJECTED)  │
- │                              │        │ • timestamp                    │
- │ • LivenessDeepfakeAgent      │        │ • verifierAgent                │
- │   - YuNet ONNX (5-pt reticle)│        │                                │
- │   - 2D FFT Spectral Roll-Off │        │ Reusable Verified Credential   │
- │   - Kinematic Blink Dips     │        │ • Portable signed JWT          │
- │                              │        │ • POST /credential/verify      │
- │ • BehavioralTrustAgent       │        └────────────────────────────────┘
- │   - Shannon Mouse Entropy    │
- │   - Keystroke Interval CV    │
- └──────────────────────────────┘
-```
+An orchestrator layer runs all three agents concurrently, combines their scores through a weighted voting system, and produces a final verdict — Verified, Flagged, or Rejected — along with a human-readable reasoning trail explaining exactly which signals contributed to the decision.
 
-### Mermaid Flowchart
+That verdict, along with a cryptographic hash of the evidence (not the raw personal data), is then written to a smart contract on-chain. This means:
 
-```mermaid
-flowchart TD
-    A[Applicant Document & Biometrics] --> B[API Gateway: Node.js]
-    B --> C[Multi-Agent Detection Pipeline: FastAPI]
-    
-    subgraph MultiAgentPipeline [Tri-Agent Consensus]
-        C --> D[DocumentForgeryAgent\nLaplacian Variance + ELA]
-        C --> E[LivenessDeepfakeAgent\nYuNet ONNX + 2D FFT]
-        C --> F[BehavioralTrustAgent\nShannon Entropy + Cadence]
-        D & E & F --> G[Consensus Arbiter\nTrust Score 0-1000]
-    end
+No one — not even an admin — can quietly change a verdict after the fact.
+A verified identity can be issued as a reusable credential, so a second institution could trust an existing verification without re-running the entire process from scratch.
+Why Blockchain (and Not Just a Database)
+Tech Stack
+Layer	Tech
+Frontend	React, Vite, TailwindCSS, Framer Motion
+Backend	Node.js, Express, ethers.js
+Agent Pipeline	Python, FastAPI, OpenCV
+Blockchain	Solidity, Hardhat (local dev) / Sepolia testnet
+Deployment	Docker Compose (local), Vercel (frontend), Render/Railway (backend + agents)
 
-    G --> H[SHA-256 Zero-PII Preimage Hash]
-    H --> I[Smart Contract: IdentityVerification.sol]
-    I --> J[On-Chain Block Receipt]
-    J --> K[Reusable Sovereign Credential: W3C JWT]
-    K --> L[Third-Party Verification Sandbox]
-```
+Project Status
 
----
+This is a final-year engineering project, currently in active development. The core pipeline (agents → orchestration → blockchain write) is functional; UI polish and testnet deployment are ongoing.
 
-## 3. Technology Stack
+What I'd Improve With More Time
+Swap the current lightweight heuristic-based forgery/liveness checks for a fine-tuned deep learning model trained on a labeled deepfake dataset.
+Add multi-institution demo support to actually show the reusable credential being trusted by a second "bank" instance.
+Add rate-limiting and anti-replay protection on the verification endpoint.
+Author
 
-| Layer | Technologies | Purpose |
-|---|---|---|
-| **Frontend** | React 18, Vite 5, Tailwind CSS, Framer Motion, Lucide Icons | 60fps institutional UI, custom HTML5 canvas mesh, magnetic buttons, 3D tilt cards |
-| **API Gateway** | Node.js, Express, ethers.js v6, crypto (HMAC-SHA256) | Request orchestration, SHA-256 preimage hashing, JWT issuance, contract binding |
-| **Agents Microservice** | Python 3.10+, FastAPI, OpenCV 5, NumPy, YuNet ONNX | Multimodal detection: FFT spectral analysis, facial landmarks, Shannon entropy |
-| **Blockchain** | Solidity 0.8.28, Hardhat, Ethers.js | Tamper-proof verification registry, zero-PII audit trail, event emission |
-| **Security & Auth** | Signed JWT (HS256 / secp256k1), SHA-256 Preimage Root | Multi-tenant audit isolation, portable reusable credentials |
+Built by Divyansh as a final-year B.Tech project, exploring how agentic AI systems and blockchain can work together to solve a real trust problem in digital identity verification.
 
----
-
-## 4. How to Run Locally
-
-### Option A: Using Docker Compose (Single Command)
-
-```bash
-docker-compose up --build
-```
-- Frontend: `http://localhost:5173`
-- Backend API Gateway: `http://localhost:4000`
-- Agents Microservice: `http://localhost:8000`
-- Hardhat EVM Node: `http://localhost:8545`
-
----
-
-### Option B: Running Individual Services Manually
-
-#### 1. Start Hardhat Blockchain Node
-```bash
-cd blockchain
-npm install
-npx hardhat node
-# In a second terminal, deploy the contract:
-npx hardhat run scripts/deploy.js --network localhost
-```
-*Writes deployed address and ABI to `shared/contract-config.json`.*
-
-#### 2. Start Python Agents Microservice
-```bash
-cd agents
-pip install -r requirements.txt
-python -m uvicorn main:app --host 127.0.0.1 --port 8000
-```
-*Health check at `http://127.0.0.1:8000/health`.*
-
-#### 3. Start Backend API Gateway
-```bash
-cd backend
-npm install
-npm run seed  # Pre-seeds 6 realistic audit records
-npm start
-```
-*Gateway running at `http://127.0.0.1:4000`.*
-
-#### 4. Start Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-*UI live at `http://127.0.0.1:5173`.*
-
----
-
-## 5. Project Highlights (Engineering Decisions)
-
-### 1. 2D FFT Spectral Roll-Off for Deepfake Detection
-Generative models (StyleGAN, diffusion upsamplers) generate images using transposed convolutions or attention grids that leave periodic grid artifacts in the frequency domain. `LivenessDeepfakeAgent` converts facial crops to grayscale and runs a 2D Fast Fourier Transform (`np.fft.fft2`). By measuring the high-frequency vs. low-frequency energy ratio, the agent detects synthetic generation even when spatial skin smoothing looks imperceptible to human eyes.
-
-### 2. CPU-Optimized Face & Landmark Tracking (YuNet ONNX)
-Rather than requiring a multi-gigabyte PyTorch/CUDA runtime, the agent uses the YuNet ONNX model (232 KB). It runs inference via OpenCV DNN in ~15ms on a standard CPU, reliably extracting bounding boxes and 5 facial landmark reticles (eyes, nose, mouth corners) to measure blink kinematic dips and head movement.
-
-### 3. Discrete Shannon Entropy for Bot Detection
-Script-driven automated attacks produce unnaturally straight cursor trajectories and uniform typing cadences. `BehavioralTrustAgent` computes the discrete Shannon entropy over mouse directional angles:
-$$H = -\sum_{i=1}^n p_i \log_2(p_i)$$
-Human users typically register $H \in [2.8, 4.2]$ bits due to natural biomechanical micro-corrections, whereas automated bots register $H < 0.8$ bits.
-
-### 4. Zero-PII SHA-256 Preimage Anchoring
-Committing names, passport numbers, or biometric vectors on a public or consortium blockchain violates GDPR Article 17 (Right to Erasure). VeriTrust AI hashes:
-`SHA256("DOC:" + docType + ":" + docNumber + ":" + docDataHash + "::TRAIL:" + reasoningTrail)`
-The resulting 32-byte hash (`bytes32`) is committed on-chain. If an insider maliciously alters the off-chain database record, recomputing the hash yields a mismatch, instantly flagging the tampering while never revealing raw identity data on-chain.
-
-### 5. Reusable Verifiable Credentials (W3C/JWT)
-Upon passing verification (`VERIFIED`), the gateway issues an HMAC-SHA256 signed credential token containing the subject DID, trust score, and on-chain transaction hash. Any third-party partner institution can call `POST /credential/verify` to validate both the cryptographic signature and cross-check the live smart contract to ensure the record has not been revoked.
-
----
-
-## 6. Pre-Seeded Demo Accounts
-
-| Account Name | Email | Password | Role | Institution |
-|---|---|---|---|---|
-| **Sarah Chen** | `officer@veritrust.ai` | `password123` | Compliance Officer | VeriTrust Global Security |
-| **Marcus Cole** | `analyst@apexbank.com` | `password123` | Risk Analyst | Apex Global Bank |
-
-*Switch accounts using the top-right profile switcher in the frontend navigation to observe per-user audit ledger isolation.*
-
----
-
-## 7. Author & Academic Credits
-
-**VeriTrust AI — Major Project**
-- **Lead Developer**: **Divyansh Mishra**
-- **GitHub**: [@Divyansh-co](https://github.com/Divyansh-co)
-- **Project Repository**: [https://github.com/Divyansh-co/DIV-MAJOR-PROJECT](https://github.com/Divyansh-co/DIV-MAJOR-PROJECT)
-- **Key Technical Areas**: Multi-Agent Orchestration, Computer Vision Forensic Steganography (OpenCV/FFT/Laplacian), Biometric Deepfake Liveness (YuNet ONNX), Biomechanical Behavioral Telemetry (Shannon Entropy), Zero-PII EVM Smart Contracts (Solidity/Hardhat).
-
+This was a deliberate design decision, not decoration. A regular database can be edited without a trace. For a KYC system, that's a real compliance risk — regulators need to know a "Verified" record wasn't quietly changed to cover up fraud, or vice versa. Writing the verdict hash on-chain makes tampering detectable, and makes the verification portable across institutions without repeating the process.
