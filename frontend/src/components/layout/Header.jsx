@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Shield,
@@ -10,6 +10,7 @@ import {
   Check,
   Building,
   Sparkles,
+  Download,
 } from "lucide-react";
 
 /**
@@ -20,6 +21,7 @@ import {
  * - "VeriTrust IDENTITY PLATFORM" branding
  * - Rounded solid hot pink active tab pill with glow
  * - Circular "DM" avatar with Divyansh Mishra / Compliance Lead
+ * - PWA native installable action button
  */
 export default function Header({
   activeView,
@@ -31,6 +33,38 @@ export default function Header({
   onSwitchUser,
 }) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    const handleAppInstalled = () => {
+      setIsAppInstalled(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      setDeferredPrompt(null);
+    }
+  };
+
   const isAgentOnline = systemHealth?.agentsMicroservice?.connected ?? true;
   const isChainOnline = systemHealth?.blockchain?.connected ?? true;
 
@@ -141,6 +175,19 @@ export default function Header({
               </span>
             </div>
           </div>
+
+          {/* PWA Install Button */}
+          {deferredPrompt && !isAppInstalled && (
+            <button
+              type="button"
+              onClick={handleInstallApp}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ff2a6d] to-[#ff416c] text-white text-xs font-semibold shadow-[0_0_12px_rgba(255,42,109,0.35)] hover:brightness-110 transition-all select-none"
+              title="Install VeriTrust AI as Desktop or Mobile Web App"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Install App</span>
+            </button>
+          )}
 
           {/* User Auth Profile Dropdown (Matched to Screenshot DM circular avatar) */}
           <div className="relative">

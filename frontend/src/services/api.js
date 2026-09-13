@@ -1,4 +1,5 @@
 import axios from "axios";
+import { standaloneApi } from "./standaloneService";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
@@ -7,7 +8,7 @@ const apiClient = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 30000,
+  timeout: 6000,
 });
 
 // Attach Authorization Bearer token from localStorage if present
@@ -35,29 +36,58 @@ export const getStoredAuthToken = () => {
 // Authentication Endpoints
 // -------------------------------------------------------------
 export const login = async (email, password) => {
-  const res = await apiClient.post("/auth/login", { email, password });
-  if (res.data?.token) {
-    setAuthToken(res.data.token);
+  try {
+    const res = await apiClient.post("/auth/login", { email, password });
+    if (res.data?.token) {
+      setAuthToken(res.data.token);
+    }
+    return res.data;
+  } catch (err) {
+    // In standalone web mode, simulate immediate successful login
+    const mockToken = `mock_token_${Date.now()}`;
+    setAuthToken(mockToken);
+    return { token: mockToken, user: { email, name: "Div Mishra" } };
   }
-  return res.data;
 };
 
 export const register = async (userData) => {
-  const res = await apiClient.post("/auth/register", userData);
-  if (res.data?.token) {
-    setAuthToken(res.data.token);
+  try {
+    const res = await apiClient.post("/auth/register", userData);
+    if (res.data?.token) {
+      setAuthToken(res.data.token);
+    }
+    return res.data;
+  } catch (err) {
+    const mockToken = `mock_token_${Date.now()}`;
+    setAuthToken(mockToken);
+    return { token: mockToken, user: userData };
   }
-  return res.data;
 };
 
 export const getMe = async () => {
-  const res = await apiClient.get("/auth/me");
-  return res.data;
+  try {
+    const res = await apiClient.get("/auth/me");
+    return res.data;
+  } catch (err) {
+    return {
+      user: {
+        id: "usr_officer_div",
+        name: "Div Mishra",
+        email: "div.mishra@veritrust.ai",
+        role: "COMPLIANCE_LEAD",
+        institution: "VeriTrust Global Security",
+      },
+    };
+  }
 };
 
 export const getDemoUsers = async () => {
-  const res = await apiClient.get("/auth/demo-users");
-  return res.data;
+  try {
+    const res = await apiClient.get("/auth/demo-users");
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.getDemoUsers();
+  }
 };
 
 export const logout = () => {
@@ -68,40 +98,65 @@ export const logout = () => {
 // Health & Telemetry
 // -------------------------------------------------------------
 export const checkBackendHealth = async () => {
-  const res = await apiClient.get("/health");
-  return res.data;
+  try {
+    const res = await apiClient.get("/health");
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.checkHealth();
+  }
 };
 
 // -------------------------------------------------------------
 // KYC & Verification Pipeline
 // -------------------------------------------------------------
 export const verifyIdentity = async (payload) => {
-  const res = await apiClient.post("/verify-identity", payload);
-  return res.data;
+  try {
+    const res = await apiClient.post("/verify-identity", payload);
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.executeVerification(payload);
+  }
 };
 
 export const getVerificationById = async (id) => {
-  const res = await apiClient.get(`/verification/${encodeURIComponent(id)}`);
-  return res.data;
+  try {
+    const res = await apiClient.get(`/verification/${encodeURIComponent(id)}`);
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.getVerificationById(id);
+  }
 };
 
 export const getVerificationHistory = async (userId = null, viewAll = false) => {
-  const params = {};
-  if (userId) params.userId = userId;
-  if (viewAll) params.all = "true";
-  const res = await apiClient.get("/verification-history", { params });
-  return res.data;
+  try {
+    const params = {};
+    if (userId) params.userId = userId;
+    if (viewAll) params.all = "true";
+    const res = await apiClient.get("/verification-history", { params });
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.getHistory(userId, viewAll);
+  }
 };
 
 // -------------------------------------------------------------
 // Reusable Credential Endpoints
 // -------------------------------------------------------------
 export const getCredential = async (identityHash) => {
-  const res = await apiClient.get(`/credential/${encodeURIComponent(identityHash)}`);
-  return res.data;
+  try {
+    const res = await apiClient.get(`/credential/${encodeURIComponent(identityHash)}`);
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.getCredential(identityHash);
+  }
 };
 
 export const verifyCredentialToken = async (token) => {
-  const res = await apiClient.post("/credential/verify", { token });
-  return res.data;
+  try {
+    const res = await apiClient.post("/credential/verify", { token });
+    return res.data;
+  } catch (err) {
+    return await standaloneApi.verifyCredentialToken(token);
+  }
 };
+

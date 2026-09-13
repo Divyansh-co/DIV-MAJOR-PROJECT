@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="110" fill="#08070b"/>
+  <rect x="14" y="14" width="484" height="484" rx="96" fill="none" stroke="#ff2a6d" stroke-width="7" opacity="0.8"/>
+  <circle cx="256" cy="256" r="170" fill="#ff2a6d" fill-opacity="0.14"/>
+  <path d="M256 96L380 150V262C380 342 326 406 256 428C186 406 132 342 132 262V150L256 96Z" fill="#140d21" stroke="#ff2a6d" stroke-width="10"/>
+  <text x="256" y="288" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="92" text-anchor="middle" letter-spacing="2">VT</text>
+  <circle cx="352" cy="166" r="12" fill="#ff2a6d"/>
+</svg>

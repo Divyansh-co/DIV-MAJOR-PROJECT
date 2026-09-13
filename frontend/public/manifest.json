@@ -1,0 +1,26 @@
+{
+  "name": "VeriTrust AI — Autonomous Identity Verification",
+  "short_name": "VeriTrust AI",
+  "description": "Multi-Agent Deepfake & Synthetic Identity KYC Verification with Ethereum Blockchain Anchoring. Built by Divyansh Mishra.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#08070b",
+  "theme_color": "#ff2a6d",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "utilities"]
+}
