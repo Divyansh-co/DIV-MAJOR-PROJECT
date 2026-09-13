@@ -1,5 +1,7 @@
 # VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
 
+**Live Demo:** [https://div-veritrust-ai.vercel.app](https://div-veritrust-ai.vercel.app)
+
 ## The Problem
 
 KYC (Know Your Customer) verification is one of the most exploited weak points in digital banking and fintech onboarding today. As deepfake generation tools have become cheaper and more accessible, fraudsters are no longer just forging documents — they're generating fake faces, cloned voices, and synthetic identities that can pass traditional liveness checks.
@@ -31,9 +33,6 @@ That verdict, along with a cryptographic hash of the evidence (not the raw perso
 ## Why Blockchain (and Not Just a Database)
 
 This was a deliberate design decision, not decoration. A regular database can be edited without a trace. For a KYC system, that's a real compliance risk — regulators need to know a "Verified" record wasn't quietly changed to cover up fraud, or vice versa. Writing the verdict hash on-chain makes tampering detectable, and makes the verification portable across institutions without repeating the process.
-
-
-```
 
 **Flow:** User uploads a document + selfie clip → Backend forwards to the agents service → Orchestrator runs all 3 agents concurrently and produces a verdict + reasoning trail → Backend hashes the evidence and writes the verdict on-chain → Frontend displays the result with the on-chain transaction as proof.
 
