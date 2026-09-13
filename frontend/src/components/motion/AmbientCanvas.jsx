@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from "react";
 
 /**
- * AmbientCanvas — High-performance HTML5 canvas layer.
- * Adaptively scales for mobile devices:
- * - Desktop: 40-48 nodes with constellation lines, gentle cursor attraction, and periodic waves
- * - Mobile (<768px): 12-16 nodes with lightweight drift, zero constellation overhead for 60fps
+ * AmbientCanvas — Obsidian Dark Purple Cosmos with Ember Pink & Emerald White
+ * High-performance HTML5 canvas animation layer:
+ * - Obsidian Dark Purple cosmic background depth
+ * - Radiant Ember Pink (AI intuition) & Emerald White (cryptographic integrity) nodes
+ * - Silky dual-tone gradient constellation connections
+ * - Periodic soft harmonic consensus shockwaves
+ * - Adaptive node scaling (fluid 60fps on both desktop and mobile)
  */
 export default function AmbientCanvas() {
   const canvasRef = useRef(null);
@@ -25,7 +28,7 @@ export default function AmbientCanvas() {
     const mouse = {
       x: -1000,
       y: -1000,
-      radius: isMobile ? 100 : 160,
+      radius: isMobile ? 110 : 180,
       isActive: false,
     };
 
@@ -59,19 +62,23 @@ export default function AmbientCanvas() {
 
     function initNodes() {
       nodes = [];
-      const count = isMobile ? 14 : Math.min(48, Math.max(26, Math.floor((width * height) / 28000)));
+      const count = isMobile ? 16 : Math.min(52, Math.max(30, Math.floor((width * height) / 26000)));
 
       for (let i = 0; i < count; i++) {
-        const isEmerald = Math.random() > 0.72;
+        // Distribute between Ember Pink (~55%) and Emerald White (~45%)
+        const isEmber = Math.random() < 0.55;
         nodes.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-          vy: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
-          baseRadius: isMobile ? 1.2 : Math.random() * 1.6 + 1.2,
+          vx: (Math.random() - 0.5) * (isMobile ? 0.22 : 0.38),
+          vy: (Math.random() - 0.5) * (isMobile ? 0.22 : 0.38),
+          baseRadius: isMobile ? 1.3 : Math.random() * 1.8 + 1.2,
           radius: 1.5,
-          alpha: Math.random() * 0.4 + 0.3,
-          color: isEmerald ? "16, 185, 129" : "0, 229, 255",
+          alpha: Math.random() * 0.45 + 0.35,
+          // Ember Pink (244, 63, 94) vs Emerald White (236, 253, 245 / 52, 211, 153)
+          color: isEmber ? "244, 63, 94" : "236, 253, 245",
+          glowColor: isEmber ? "251, 113, 133" : "52, 211, 153",
+          isEmber,
           highlight: 0,
         });
       }
@@ -82,39 +89,56 @@ export default function AmbientCanvas() {
     const render = (time) => {
       ctx.clearRect(0, 0, width, height);
 
-      // Trigger periodic neural consensus waves (less frequent on mobile)
-      const waveInterval = isMobile ? 12000 : 8500;
+      // Deep Obsidian Purple Atmospheric Radial Wash
+      const bgGrad = ctx.createRadialGradient(
+        width * 0.5,
+        height * 0.3,
+        40,
+        width * 0.5,
+        height * 0.5,
+        Math.max(width, height) * 0.85
+      );
+      bgGrad.addColorStop(0, "rgba(28, 13, 56, 0.45)");
+      bgGrad.addColorStop(0.5, "rgba(16, 7, 33, 0.25)");
+      bgGrad.addColorStop(1, "rgba(6, 2, 12, 0)");
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // Periodic Neural Consensus Wave Pulses (Alternating Ember Pink & Emerald White)
+      const waveInterval = isMobile ? 11000 : 7500;
       if (time - lastWaveTime > waveInterval) {
         lastWaveTime = time;
+        const isEmberWave = Math.random() > 0.4;
         waves.push({
-          x: width * 0.5 + (Math.random() - 0.5) * (width * 0.3),
-          y: height * 0.4 + (Math.random() - 0.5) * (height * 0.25),
+          x: width * 0.5 + (Math.random() - 0.5) * (width * 0.35),
+          y: height * 0.45 + (Math.random() - 0.5) * (height * 0.3),
           radius: 10,
-          maxRadius: Math.max(width, height) * 0.8,
-          alpha: 0.28,
-          speed: isMobile ? 1.4 : 1.8,
+          maxRadius: Math.max(width, height) * 0.85,
+          alpha: 0.32,
+          color: isEmberWave ? "244, 63, 94" : "52, 211, 153",
+          speed: isMobile ? 1.5 : 1.9,
         });
       }
 
-      // Draw pulse waves
+      // Draw Expanding Waves
       for (let w = waves.length - 1; w >= 0; w--) {
         const wave = waves[w];
         wave.radius += wave.speed;
-        wave.alpha = Math.max(0, 0.28 * (1 - wave.radius / wave.maxRadius));
+        wave.alpha = Math.max(0, 0.32 * (1 - wave.radius / wave.maxRadius));
 
-        if (wave.radius >= wave.maxRadius || wave.alpha <= 0.01) {
+        if (wave.radius >= wave.maxRadius || wave.alpha <= 0.008) {
           waves.splice(w, 1);
           continue;
         }
 
         ctx.beginPath();
         ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0, 229, 255, ${wave.alpha * 0.6})`;
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(${wave.color}, ${wave.alpha * 0.75})`;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
 
-      // Update nodes
+      // Update Node Physics
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         n.x += n.vx;
@@ -129,10 +153,10 @@ export default function AmbientCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < mouse.radius && dist > 1) {
-            const force = (1 - dist / mouse.radius) * 0.015;
+            const force = (1 - dist / mouse.radius) * 0.018;
             n.vx += (dx / dist) * force;
             n.vy += (dy / dist) * force;
-            n.highlight = Math.min(1, n.highlight + 0.08);
+            n.highlight = Math.min(1, n.highlight + 0.09);
           } else {
             n.highlight = Math.max(0, n.highlight - 0.02);
           }
@@ -141,16 +165,15 @@ export default function AmbientCanvas() {
         }
 
         const currentSpeed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-        if (currentSpeed > 0.8) {
-          n.vx = (n.vx / currentSpeed) * 0.8;
-          n.vy = (n.vy / currentSpeed) * 0.8;
+        if (currentSpeed > 0.85) {
+          n.vx = (n.vx / currentSpeed) * 0.85;
+          n.vy = (n.vy / currentSpeed) * 0.85;
         }
       }
 
-      // Constellation connections (Desktop only to prevent mobile lag)
+      // Constellation Lines (Desktop only for 60fps)
       if (!isMobile) {
-        ctx.lineWidth = 0.65;
-        const MAX_DIST = 110;
+        const MAX_DIST = 118;
         for (let i = 0; i < nodes.length; i++) {
           const a = nodes[i];
           for (let j = i + 1; j < nodes.length; j++) {
@@ -160,9 +183,17 @@ export default function AmbientCanvas() {
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < MAX_DIST) {
-              const proximityAlpha = (1 - dist / MAX_DIST) * 0.16;
-              const extraAlpha = Math.max(a.highlight, b.highlight) * 0.28;
-              ctx.strokeStyle = `rgba(0, 229, 255, ${proximityAlpha + extraAlpha})`;
+              const proximityAlpha = (1 - dist / MAX_DIST) * 0.18;
+              const extraAlpha = Math.max(a.highlight, b.highlight) * 0.32;
+              const totalAlpha = proximityAlpha + extraAlpha;
+
+              // Dual-tone gradient stroke between nodes
+              const lineGrad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+              lineGrad.addColorStop(0, `rgba(${a.color}, ${totalAlpha})`);
+              lineGrad.addColorStop(1, `rgba(${b.color}, ${totalAlpha})`);
+
+              ctx.strokeStyle = lineGrad;
+              ctx.lineWidth = 0.75;
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
               ctx.lineTo(b.x, b.y);
@@ -171,17 +202,17 @@ export default function AmbientCanvas() {
           }
         }
 
-        // Draw line to cursor if near
+        // Draw Interactive Line to Cursor
         if (mouse.isActive) {
           for (let i = 0; i < nodes.length; i++) {
             const n = nodes[i];
             const dx = n.x - mouse.x;
             const dy = n.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < mouse.radius * 0.8) {
-              const lineAlpha = (1 - dist / (mouse.radius * 0.8)) * 0.25;
-              ctx.strokeStyle = `rgba(0, 229, 255, ${lineAlpha})`;
-              ctx.lineWidth = 0.75;
+            if (dist < mouse.radius * 0.85) {
+              const lineAlpha = (1 - dist / (mouse.radius * 0.85)) * 0.3;
+              ctx.strokeStyle = `rgba(${n.color}, ${lineAlpha})`;
+              ctx.lineWidth = 0.9;
               ctx.beginPath();
               ctx.moveTo(n.x, n.y);
               ctx.lineTo(mouse.x, mouse.y);
@@ -191,21 +222,23 @@ export default function AmbientCanvas() {
         }
       }
 
-      // Render individual nodes
+      // Render Individual Nodes with Ambient Halos
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        const currentAlpha = Math.min(1, n.alpha + n.highlight * 0.6);
-        const radius = n.baseRadius + n.highlight * 1.2;
+        const currentAlpha = Math.min(1, n.alpha + n.highlight * 0.55);
+        const radius = n.baseRadius + n.highlight * 1.3;
 
+        // Core dot
         ctx.beginPath();
         ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${n.color}, ${currentAlpha})`;
         ctx.fill();
 
-        if (n.highlight > 0.1) {
+        // Glowing outer halo
+        if (n.highlight > 0.08) {
           ctx.beginPath();
-          ctx.arc(n.x, n.y, radius * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${n.color}, ${n.highlight * 0.18})`;
+          ctx.arc(n.x, n.y, radius * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${n.glowColor}, ${n.highlight * 0.22})`;
           ctx.fill();
         }
       }
@@ -226,7 +259,7 @@ export default function AmbientCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80"
+      className="fixed inset-0 pointer-events-none z-0 opacity-85"
       style={{ willChange: "transform" }}
     />
   );

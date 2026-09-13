@@ -1,63 +1,64 @@
 /* ==========================================================================
-   VeriTrust AI — Institutional Theme & Design Tokens
-   Designed for high-trust cybersecurity & blockchain KYC verification.
+   VeriTrust AI — Ember Pink, Emerald White & Obsidian Dark Purple Theme
+   Designed for premium institutional KYC verification with glowing cosmic aura.
    ========================================================================== */
 
 :root {
-  /* Color Palette */
-  --bg-dark-0: #060B14;
-  --bg-dark-1: #0A1628;
-  --bg-dark-2: #0F1C2E;
-  --bg-gradient: radial-gradient(120% 120% at 50% 0%, #0F1C2E 0%, #0A1628 45%, #060B14 100%);
+  /* Obsidian Dark Purple Background Void */
+  --bg-dark-0: #06020c;
+  --bg-dark-1: #0c0517;
+  --bg-dark-2: #140926;
+  --bg-gradient: radial-gradient(130% 120% at 50% 0%, #1c0d38 0%, #0d061a 45%, #06020c 100%);
 
-  /* Card Surfaces & Glassmorphism */
-  --surface-card: rgba(17, 27, 46, 0.78);
-  --surface-card-hover: rgba(22, 35, 59, 0.88);
-  --surface-card-active: rgba(26, 42, 71, 0.92);
-  --surface-card-border: #1E2A44;
-  --surface-glass-blur: blur(16px);
+  /* Obsidian Glass Card Surfaces */
+  --surface-card: rgba(20, 10, 38, 0.78);
+  --surface-card-hover: rgba(30, 15, 58, 0.88);
+  --surface-card-active: rgba(38, 19, 74, 0.94);
+  --surface-card-border: #33175c;
+  --surface-glass-blur: blur(20px);
 
-  /* Primary AI Accent (Electric Cyan) */
-  --accent-ai: #00E5FF;
-  --accent-ai-glow: rgba(0, 229, 255, 0.4);
-  --accent-ai-subtle: rgba(0, 229, 255, 0.12);
+  /* Primary AI Accent: Radiant Ember Pink */
+  --accent-ai: #f43f5e;
+  --accent-ai-glow: rgba(244, 63, 94, 0.48);
+  --accent-ai-subtle: rgba(244, 63, 94, 0.14);
 
-  /* Secondary Blockchain Accent (Emerald) */
-  --accent-chain: #10B981;
-  --accent-chain-glow: rgba(16, 185, 129, 0.4);
-  --accent-chain-subtle: rgba(16, 185, 129, 0.12);
+  /* Secondary Blockchain Accent: Emerald White & Mint */
+  --accent-chain: #34d399;
+  --accent-chain-glow: rgba(52, 211, 153, 0.45);
+  --accent-chain-subtle: rgba(52, 211, 153, 0.14);
+  --accent-emerald-white: #ecfdf5;
 
-  /* Warning / Risk Accent (Amber to Coral Gradient) */
-  --accent-risk-amber: #F59E0B;
-  --accent-risk-coral: #EF4444;
-  --accent-risk-gradient: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
-  --accent-risk-glow: rgba(239, 68, 68, 0.35);
-  --accent-risk-subtle: rgba(239, 68, 68, 0.12);
+  /* Warning / Risk Accent */
+  --accent-risk-amber: #fbbf24;
+  --accent-risk-coral: #f87171;
+  --accent-risk-gradient: linear-gradient(135deg, #fbbf24 0%, #f43f5e 100%);
+  --accent-risk-glow: rgba(244, 63, 94, 0.4);
+  --accent-risk-subtle: rgba(244, 63, 94, 0.14);
 
-  /* Text Colors */
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --text-dim: #475569;
+  /* Text Colors: Crisp Emerald White & Rose Muted */
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a699be;
+  --text-dim: #716287;
 
   /* Borders & Dividers */
-  --border-default: #1E293B;
-  --border-focus: #00E5FF;
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: #2d1452;
+  --border-focus: #f43f5e;
+  --border-subtle: rgba(244, 63, 94, 0.12);
 
-  /* CTAs & Progress Elements (Subtle Cyan to Emerald Diagonal) */
-  --grad-cta: linear-gradient(135deg, #00E5FF 0%, #10B981 100%);
-  --grad-cta-hover: linear-gradient(135deg, #33EBFF 0%, #34D399 100%);
-  --grad-cta-glow: 0 0 28px rgba(0, 229, 255, 0.35);
+  /* CTAs & Progress Elements: Ember Pink to Emerald White Gradient */
+  --grad-cta: linear-gradient(135deg, #f43f5e 0%, #10b981 100%);
+  --grad-cta-hover: linear-gradient(135deg, #fb7185 0%, #34d399 100%);
+  --grad-cta-glow: 0 0 32px rgba(244, 63, 94, 0.42);
 
   /* Shadows & Glows */
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --shadow-glow-cyan: 0 0 20px -3px rgba(0, 229, 255, 0.35);
-  --shadow-glow-emerald: 0 0 20px -3px rgba(16, 185, 129, 0.35);
-  --shadow-glow-risk: 0 0 20px -3px rgba(239, 68, 68, 0.35);
+  --shadow-card: 0 16px 40px -12px rgba(0, 0, 0, 0.75);
+  --shadow-glow-cyan: 0 0 24px -2px rgba(244, 63, 94, 0.4);
+  --shadow-glow-emerald: 0 0 24px -2px rgba(52, 211, 153, 0.4);
+  --shadow-glow-risk: 0 0 24px -2px rgba(244, 63, 94, 0.4);
 }
 
-/* Glass Surface Utility */
+/* Obsidian Glass Surface Utility */
 .glass-surface {
   background: var(--surface-card);
   backdrop-filter: var(--surface-glass-blur);
@@ -70,11 +71,11 @@
 }
 .glass-surface-hover:hover {
   background: var(--surface-card-hover);
-  border-color: rgba(0, 229, 255, 0.3);
-  box-shadow: 0 12px 35px -8px rgba(0, 229, 255, 0.12);
+  border-color: rgba(244, 63, 94, 0.4);
+  box-shadow: 0 16px 40px -10px rgba(244, 63, 94, 0.18);
 }
 
-/* Rotating Gradient Border for Magnetic Buttons & Featured Elements */
+/* Rotating Gradient Border */
 @keyframes rotate-border {
   0% {
     transform: rotate(0deg);
@@ -91,13 +92,13 @@
 /* Subtle Pulse Keyframe for Live Nodes */
 @keyframes radar-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5);
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.55);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
+    box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
   }
 }
 
@@ -105,18 +106,18 @@
   animation: radar-pulse 2.2s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Custom Scrollbar */
+/* Custom Obsidian & Ember Pink Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #060B14;
+  background: #06020c;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E2A44;
+  background: #2b134f;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00E5FF44;
+  background: #f43f5e88;
 }

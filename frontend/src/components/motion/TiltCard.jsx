@@ -46,10 +46,11 @@ export default function TiltCard({
     rotateY.set(0);
   };
 
-  // Border glow tone based on prop
-  let borderGlowRgb = "0, 229, 255";
-  if (glowColor === "emerald") borderGlowRgb = "16, 185, 129";
-  if (glowColor === "risk") borderGlowRgb = "239, 68, 68";
+  // Border glow tone based on prop (Default: Ember Pink, Secondary: Emerald White)
+  let borderGlowRgb = "244, 63, 94";
+  if (glowColor === "emerald") borderGlowRgb = "52, 211, 153";
+  if (glowColor === "white" || glowColor === "emeraldWhite") borderGlowRgb = "236, 253, 245";
+  if (glowColor === "risk") borderGlowRgb = "244, 63, 94";
 
   return (
     <div
@@ -68,22 +69,22 @@ export default function TiltCard({
         }}
         data-cursor={dataCursor}
         className={`relative rounded-2xl transition-shadow duration-300 ${
-          mousePos.active ? "shadow-2xl" : "shadow-lg"
+          mousePos.active ? "shadow-2xl shadow-rose-950/40" : "shadow-lg"
         } ${className}`}
       >
         {/* Living Border Gradient (tracks cursor position along the edge) */}
         <div
           className="absolute -inset-[1px] rounded-2xl pointer-events-none transition-opacity duration-300"
           style={{
-            opacity: mousePos.active ? 1 : 0.4,
+            opacity: mousePos.active ? 1 : 0.45,
             background: mousePos.active
-              ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(${borderGlowRgb}, 0.55), rgba(${borderGlowRgb}, 0.1) 40%, #1E2A44 80%)`
-              : "linear-gradient(135deg, #1E2A44 0%, #0F1C2E 100%)",
+              ? `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(${borderGlowRgb}, 0.6), rgba(${borderGlowRgb}, 0.12) 40%, #32165c 80%)`
+              : "linear-gradient(135deg, #32165c 0%, #1c0d38 100%)",
           }}
         />
 
-        {/* Card Surface: #111B2E with 78% opacity + glassmorphism backdrop-blur */}
-        <div className="relative rounded-2xl bg-[#111B2E]/80 backdrop-blur-xl border border-[#1E2A44]/60 p-6 overflow-hidden h-full">
+        {/* Card Surface: Obsidian Dark Purple (#120824) with 85% opacity + glassmorphism backdrop-blur */}
+        <div className="relative rounded-2xl bg-[#120824]/85 backdrop-blur-xl border border-[#32165c]/70 p-6 overflow-hidden h-full">
           {/* Subtle cursor spotlight inside the card */}
           {mousePos.active && glowColor !== "none" && (
             <div

@@ -109,9 +109,9 @@ export default function MagneticButton({
         style={{
           background:
             variant === "danger"
-              ? "radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(0, 229, 255, 0.35) 0%, rgba(16, 185, 129, 0.25) 70%)",
-          opacity: disabled ? 0 : Math.max(proximityGlow, isHovered ? 0.8 : 0),
+              ? "radial-gradient(circle, rgba(244, 63, 94, 0.5) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(244, 63, 94, 0.42) 0%, rgba(52, 211, 153, 0.3) 70%)",
+          opacity: disabled ? 0 : Math.max(proximityGlow, isHovered ? 0.85 : 0),
         }}
       />
 
@@ -131,10 +131,10 @@ export default function MagneticButton({
           disabled
             ? "opacity-50 cursor-not-allowed bg-slate-900/60 text-slate-500 border border-slate-800"
             : variant === "secondary"
-            ? "bg-[#111B2E]/90 text-slate-200 hover:text-white border border-[#1E2A44] hover:border-cyan-500/40 shadow-sm"
+            ? "bg-[#140828]/90 text-slate-200 hover:text-white border border-[#351860] hover:border-rose-500/40 shadow-sm"
             : variant === "danger"
-            ? "bg-gradient-to-r from-amber-600 to-rose-600 text-white font-semibold border border-rose-500/40 shadow-lg"
-            : "bg-[#0B1524] text-white font-semibold shadow-lg shadow-cyan-950/40"
+            ? "bg-gradient-to-r from-rose-600 to-red-600 text-white font-semibold border border-rose-500/40 shadow-lg"
+            : "bg-[#140828] text-white font-semibold shadow-lg shadow-rose-950/40"
         } ${className}`}
       >
         {/* Rotating Conic Border Gradient on Hover for Primary variant */}
@@ -144,17 +144,17 @@ export default function MagneticButton({
               className="absolute inset-[-100%] animate-rotate-border"
               style={{
                 background:
-                  "conic-gradient(from 0deg at 50% 50%, #00E5FF 0%, #10B981 33%, #00E5FF 66%, #10B981 100%)",
+                  "conic-gradient(from 0deg at 50% 50%, #f43f5e 0%, #34d399 33%, #fb7185 66%, #10b981 100%)",
               }}
             />
             {/* Inner fill mask */}
-            <span className="absolute inset-[1.5px] rounded-[10px] bg-[#0A1424] -z-0" />
+            <span className="absolute inset-[1.5px] rounded-[10px] bg-[#0c0517] -z-0" />
           </span>
         )}
 
-        {/* Diagonal Cyan-to-Emerald overlay gradient */}
+        {/* Diagonal Ember-to-Emerald overlay gradient */}
         {variant === "primary" && !disabled && (
-          <span className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <span className="absolute inset-0 bg-gradient-to-br from-rose-500/20 via-transparent to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         )}
 
         {/* Content Container */}

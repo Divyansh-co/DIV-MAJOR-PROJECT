@@ -8,10 +8,40 @@ export default {
   theme: {
     extend: {
       colors: {
+        obsidian: {
+          950: "#06020c",
+          900: "#0c0517",
+          850: "#110720",
+          800: "#170b2c",
+          750: "#1f0e3a",
+          700: "#2b144d",
+          600: "#3d1b6e",
+          500: "#552799",
+        },
+        ember: {
+          DEFAULT: "#f43f5e",
+          50: "#fff1f2",
+          100: "#ffe4e6",
+          200: "#fecdd3",
+          300: "#fda4af",
+          400: "#fb7185",
+          500: "#f43f5e",
+          600: "#e11d48",
+          glow: "rgba(244, 63, 94, 0.45)",
+        },
+        emeraldWhite: {
+          DEFAULT: "#ecfdf5",
+          50: "#ffffff",
+          100: "#f0fdf4",
+          200: "#d1fae5",
+          300: "#a7f3d0",
+          400: "#6ee7b7",
+          500: "#34d399",
+        },
         bg: {
-          dark0: "#060B14",
-          dark1: "#0A1628",
-          dark2: "#0F1C2E",
+          dark0: "#06020c",
+          dark1: "#0c0517",
+          dark2: "#140926",
         },
         surface: {
           card: "var(--surface-card)",
