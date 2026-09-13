@@ -1,6 +1,6 @@
 # VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
 
-**Live Demo:** [https://frontend-binary-bandits4.vercel.app](https://frontend-binary-bandits4.vercel.app) (or [frontend-ll66tymc2-binary-bandits4.vercel.app](https://frontend-ll66tymc2-binary-bandits4.vercel.app))
+**Live Demo:** https://dist-g79uqvc3b-binary-bandits4.vercel.app/
 
 ## The Problem
 
