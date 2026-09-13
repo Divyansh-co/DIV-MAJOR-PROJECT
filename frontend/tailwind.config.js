@@ -56,8 +56,11 @@ export default {
         },
       },
       fontFamily: {
-        mono: ["'JetBrains Mono'", "monospace"],
+        heading: ["'Space Grotesk'", "'Inter'", "system-ui", "sans-serif"],
         sans: ["'Inter'", "system-ui", "sans-serif"],
+        body: ["'Inter'", "system-ui", "sans-serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
+        tech: ["'JetBrains Mono'", "monospace"],
       },
     },
   },

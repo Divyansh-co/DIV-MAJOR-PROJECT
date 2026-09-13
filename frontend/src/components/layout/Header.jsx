@@ -74,31 +74,53 @@ export default function Header({
           </div>
         </div>
 
-        {/* 2. Spaced & Free Floating Navigation Switcher */}
-        <nav className="hidden md:flex items-center gap-2 bg-[#140828]/90 p-1.5 rounded-2xl border border-[#351860]/80 shadow-xl shadow-black/50">
-          {navItems.map((item) => {
+        {/* 2. Bespoke Floating Command Dock with Distinct Geometric Active Indicator */}
+        <nav className="hidden md:flex items-center gap-1.5 bg-[#0f051e]/90 p-1.5 rounded-2xl border border-[#351860]/90 shadow-2xl shadow-black/60 relative">
+          {navItems.map((item, idx) => {
             const Icon = item.icon;
             const isActive = activeView === item.id;
+            const indexStr = `0${idx + 1}`;
             return (
               <button
                 key={item.id}
                 type="button"
                 disabled={item.disabled}
                 onClick={() => setActiveView(item.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium tracking-wide transition-all duration-200 select-none ${
+                className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono tracking-wide transition-all duration-300 select-none ${
                   isActive
-                    ? "bg-gradient-to-r from-rose-500/25 via-purple-600/20 to-emerald-500/20 text-white font-semibold shadow-md shadow-rose-950/40 border border-rose-500/40"
+                    ? "text-white font-bold bg-gradient-to-r from-rose-950/80 via-[#230d42] to-emerald-950/70 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.25)]"
                     : item.disabled
-                    ? "text-slate-600 cursor-not-allowed opacity-40"
-                    : "text-slate-300 hover:text-white hover:bg-white/[0.06]"
+                    ? "text-slate-600 cursor-not-allowed opacity-35"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]"
                 }`}
               >
+                {/* Active Geometric Pip Indicator */}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPip"
+                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-5 h-1 bg-gradient-to-r from-rose-400 via-purple-300 to-emerald-400 rounded-full shadow-[0_0_10px_#f43f5e]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+
+                <span
+                  className={`text-[9px] font-bold px-1.5 py-0.5 rounded transition-colors ${
+                    isActive
+                      ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
+                      : "text-slate-600 bg-black/30"
+                  }`}
+                >
+                  {indexStr}
+                </span>
+
                 <Icon
                   className={`w-3.5 h-3.5 transition-colors ${
-                    isActive ? "text-rose-400" : "text-slate-400"
+                    isActive ? "text-rose-400" : "text-slate-500"
                   }`}
                 />
-                <span>{item.label}</span>
+                <span className="font-heading font-semibold text-[11px] tracking-normal">
+                  {item.label}
+                </span>
               </button>
             );
           })}

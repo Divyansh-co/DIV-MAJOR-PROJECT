@@ -234,6 +234,7 @@ export default function App() {
               transition={{ type: "spring", stiffness: 260, damping: 24 }}
             >
               <CredentialView
+                history={history}
                 identityHash={selectedCredentialHash || activeReport?.identityHash}
                 activeReport={activeReport}
                 onStartVerify={() => setActiveView("verify")}

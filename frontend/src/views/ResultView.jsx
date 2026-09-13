@@ -22,6 +22,7 @@ import MagneticButton from "../components/motion/MagneticButton";
 import ScoreGauge from "../components/common/ScoreGauge";
 import StatusBadge from "../components/common/StatusBadge";
 import ReasoningTrail from "../components/shared/ReasoningTrail";
+import ConsensusConvergenceNode from "../components/shared/ConsensusConvergenceNode";
 
 /**
  * ResultView — Institutional Verification Verdict & On-Chain Audit Proof
@@ -140,7 +141,7 @@ export default function ResultView({ report, onViewCredential, onNewVerification
             </div>
 
             <div className="py-4">
-              <ScoreGauge score={trustScore} size={190} />
+              <ScoreGauge score={trustScore} verdict={verdict} size={190} />
             </div>
 
             <div className="w-full pt-3 border-t border-[#1E2A44] text-[11px] font-mono text-center text-slate-400">
@@ -223,145 +224,224 @@ export default function ResultView({ report, onViewCredential, onNewVerification
         </div>
       </div>
 
-      {/* Forensic Signal Deep Dive Grid (3 Agents) */}
-      <div>
-        <h3 className="text-sm font-bold text-slate-300 font-mono uppercase tracking-wider mb-4 flex items-center gap-2">
-          <Cpu className="w-4 h-4 text-cyan-400" />
-          Autonomous Multi-Agent Forensic Breakdown
-        </h3>
+      {/* Custom Bespoke Visual Element: Multi-Agent Neural Consensus & EVM Convergence Node */}
+      <ConsensusConvergenceNode
+        trustScore={trustScore}
+        verdict={verdict}
+        agentBreakdown={agentBreakdown}
+        identityHash={identityHash}
+        blockchainTx={blockchainTx}
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Agent 1: Document Forgery */}
-          <TiltCard glowColor="cyan" className="p-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#1E2A44]">
-              <div className="flex items-center gap-2">
-                <FileCheck className="w-4 h-4 text-cyan-400" />
-                <span className="text-xs font-bold text-white font-mono">
-                  DocumentForgeryAgent
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-cyan-400">
-                Score: {docAgent?.raw_metric_score ?? docAgent?.forgery_score ?? 0.05}
-              </span>
-            </div>
+      {/* Asymmetric Multi-Agent Forensic Deep Dive (Breaks uniform 3-card pattern) */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-bold text-slate-200 font-heading uppercase tracking-wider flex items-center gap-2">
+            <Cpu className="w-4 h-4 text-cyan-400" />
+            Specialized Forensic Classifiers & Telemetry
+          </h3>
+          <span className="text-[10px] font-mono text-slate-400">
+            Differentiated Visual Weights (40% Primary • 35% Optics • 25% Telemetry)
+          </span>
+        </div>
 
-            <div className="mt-3 space-y-2.5 text-[11px] font-mono">
-              <div className="flex justify-between text-slate-400">
-                <span>Laplacian Variance Ratio:</span>
-                <span className="text-slate-200">
-                  {docAgent?.signals?.laplacian_variance_ratio ?? docAgent?.details?.sharpness_variance?.toFixed(1) ?? "49.2"}x
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Max Font Baseline Jitter:</span>
-                <span className="text-slate-200">
-                  {docAgent?.signals?.max_font_baseline_jitter_px ?? docAgent?.details?.kerning_jitter_cv?.toFixed(2) ?? "0.0"} px
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>ELA Regional Max Diff:</span>
-                <span className="text-slate-200">
-                  {docAgent?.signals?.ela_max_patch_diff ?? docAgent?.details?.ela_mean_diff?.toFixed(2) ?? "1.3"}
-                </span>
-              </div>
-
-              {docAgent?.flags && docAgent.flags.length > 0 && (
-                <div className="mt-2 p-2 rounded bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[10px]">
-                  {docAgent.flags.map((f, i) => (
-                    <div key={i}>⚠️ {f}</div>
-                  ))}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* PRIMARY / DECIDING AGENT: Liveness & Deepfake Agent (7 cols on lg) */}
+          <div className="lg:col-span-7">
+            <TiltCard glowColor="emerald" className="p-6 rounded-3xl border-2 border-purple-500/40 bg-gradient-to-br from-[#120624]/95 via-[#090314]/98 to-[#17092b]/95 shadow-2xl h-full flex flex-col justify-between" dataCursor="risk">
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-purple-900/40">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-purple-950/80 border border-purple-700/60 flex items-center justify-center text-purple-300 shadow-md">
+                      <Video className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-white font-heading">
+                          LivenessDeepfakeAgent
+                        </span>
+                        <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-700/60">
+                          PRIMARY ARBITER • 40%
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-400 font-sans">
+                        Biometric neural vision, 2D FFT spectral roll-off, & blink kinematics
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right font-mono">
+                    <span className="text-[10px] text-slate-400 block">DEEPFAKE PROB</span>
+                    <span className="text-xs font-bold text-purple-300">
+                      {liveAgent?.raw_metric_score ?? liveAgent?.deepfake_probability ?? 0.04}
+                    </span>
+                  </div>
                 </div>
-              )}
-            </div>
-          </TiltCard>
 
-          {/* Agent 2: Liveness Deepfake */}
-          <TiltCard glowColor="emerald" className="p-5" dataCursor="risk">
-            <div className="flex items-center justify-between pb-3 border-b border-[#1E2A44]">
-              <div className="flex items-center gap-2">
-                <Video className="w-4 h-4 text-purple-400" />
-                <span className="text-xs font-bold text-white font-mono">
-                  LivenessDeepfakeAgent
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-purple-400">
-                Prob: {liveAgent?.raw_metric_score ?? liveAgent?.deepfake_probability ?? 0.04}
-              </span>
-            </div>
-
-            <div className="mt-3 space-y-2.5 text-[11px] font-mono">
-              <div className="flex justify-between text-slate-400">
-                <span>2D FFT High-Freq Ratio:</span>
-                <span className="text-slate-200">
-                  {liveAgent?.signals?.fft_high_freq_ratio ?? liveAgent?.details?.spectral_ratio?.toFixed(2) ?? "0.39"} (1/f Attenuated)
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Blink Kinematic Dip Ratio:</span>
-                <span className="text-emerald-400">
-                  {liveAgent?.signals?.blink_dip_ratio ?? liveAgent?.details?.blink_dips ?? "0.67"} (Valid)
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Boundary Gradient Discontinuity:</span>
-                <span className="text-slate-200">
-                  {liveAgent?.signals?.boundary_gradient_ratio ?? "0.21"}x
-                </span>
-              </div>
-
-              {liveAgent?.flags && liveAgent.flags.length > 0 && (
-                <div className="mt-2 p-2 rounded bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[10px]">
-                  {liveAgent.flags.map((f, i) => (
-                    <div key={i}>⚠️ {f}</div>
-                  ))}
+                {/* Inline SVG Mini Spectral Frequency Roll-Off Chart */}
+                <div className="mt-5 p-4 rounded-2xl bg-[#070211]/90 border border-purple-900/40">
+                  <div className="flex items-center justify-between text-xs font-mono mb-2">
+                    <span className="text-slate-400 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-purple-400" /> 2D FFT Spectral Roll-Off vs 1/f Attenuation Limit
+                    </span>
+                    <span className="text-emerald-400 font-semibold text-[11px]">
+                      {liveAgent?.signals?.fft_high_freq_ratio ?? "0.399"} (Organic)
+                    </span>
+                  </div>
+                  <div className="h-16 w-full relative">
+                    <svg className="w-full h-full overflow-visible" viewBox="0 0 300 60" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="specGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.5" />
+                          <stop offset="100%" stopColor="#a855f7" stopOpacity="0.0" />
+                        </linearGradient>
+                      </defs>
+                      {/* Theoretical GAN threshold line at Y: 22 */}
+                      <line x1="0" y1="22" x2="300" y2="22" stroke="#f43f5e" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+                      <text x="230" y="18" fill="#fb7185" fontSize="8" fontFamily="'JetBrains Mono', monospace">GAN Cutoff (0.45)</text>
+                      {/* Spectral curve */}
+                      <path d="M0,52 Q40,48 80,42 T160,35 T220,38 T300,34 L300,60 L0,60 Z" fill="url(#specGrad)" />
+                      <path d="M0,52 Q40,48 80,42 T160,35 T220,38 T300,34" fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinecap="round" />
+                      <circle cx="160" cy="35" r="3.5" fill="#a855f7" className="animate-pulse" />
+                    </svg>
+                  </div>
                 </div>
-              )}
-            </div>
-          </TiltCard>
 
-          {/* Agent 3: Behavioral Trust */}
-          <TiltCard glowColor="cyan" className="p-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#1E2A44]">
-              <div className="flex items-center gap-2">
-                <Fingerprint className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-bold text-white font-mono">
-                  BehavioralTrustAgent
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-emerald-400">
-                Score: {behAgent?.raw_metric_score ?? behAgent?.trust_score ?? 0.97}
-              </span>
-            </div>
+                {/* Primary Forensic Readout Grid */}
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] font-mono">
+                  <div className="p-3 rounded-xl bg-[#0e061d] border border-[#2b144d]/70 flex items-center justify-between">
+                    <div>
+                      <span className="text-slate-400 block text-[10px]">BLINK KINEMATIC DIP</span>
+                      <span className="text-emerald-400 font-semibold">
+                        {liveAgent?.signals?.blink_dip_ratio ?? liveAgent?.details?.blink_dips ?? "0.670"}
+                      </span>
+                    </div>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                      Voluntary
+                    </span>
+                  </div>
 
-            <div className="mt-3 space-y-2.5 text-[11px] font-mono">
-              <div className="flex justify-between text-slate-400">
-                <span>Keystroke Interval CV:</span>
-                <span className="text-slate-200">
-                  {behAgent?.signals?.typing_coef_variation ?? behAgent?.details?.keystroke_cv?.toFixed(2) ?? "0.22"} (Organic)
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Shannon Mouse Entropy:</span>
-                <span className="text-slate-200">
-                  {behAgent?.signals?.mouse_entropy_bits ?? behAgent?.details?.mouse_entropy?.toFixed(2) ?? "2.52"} bits
-                </span>
-              </div>
-              <div className="flex justify-between text-slate-400">
-                <span>Active Session Window:</span>
-                <span className="text-emerald-400">
-                  {behAgent?.signals?.session_duration_sec ?? "34.2"}s
-                </span>
-              </div>
-
-              {behAgent?.flags && behAgent.flags.length > 0 && (
-                <div className="mt-2 p-2 rounded bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[10px]">
-                  {behAgent.flags.map((f, i) => (
-                    <div key={i}>⚠️ {f}</div>
-                  ))}
+                  <div className="p-3 rounded-xl bg-[#0e061d] border border-[#2b144d]/70 flex items-center justify-between">
+                    <div>
+                      <span className="text-slate-400 block text-[10px]">FACIAL GRADIENT RATIO</span>
+                      <span className="text-slate-200 font-semibold">
+                        {liveAgent?.signals?.boundary_gradient_ratio ?? "0.21"}x
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-slate-400">Coherent</span>
+                  </div>
                 </div>
-              )}
-            </div>
-          </TiltCard>
+
+                {liveAgent?.flags && liveAgent.flags.length > 0 && (
+                  <div className="mt-3 p-2.5 rounded-xl bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[11px] font-mono">
+                    {liveAgent.flags.map((f, i) => (
+                      <div key={i}>⚠️ {f}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </TiltCard>
+          </div>
+
+          {/* SUPPORTING FORENSIC AGENTS (5 cols on lg: 2 stacked specialized cards) */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            {/* Supporting Agent 1: Document Forgery (Optics) */}
+            <TiltCard glowColor="cyan" className="p-5 rounded-2xl border border-[#2b144d] bg-[#0c051a]/95">
+              <div className="flex items-center justify-between pb-3 border-b border-[#2b144d]/70">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-cyan-950/80 border border-cyan-800/80 flex items-center justify-center text-cyan-400">
+                    <FileCheck className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-white font-heading">
+                      DocumentForgeryAgent
+                    </span>
+                    <span className="text-[10px] font-mono text-cyan-400 block -mt-0.5">35% Weight</span>
+                  </div>
+                </div>
+                <span className="text-[11px] font-mono font-semibold text-cyan-400">
+                  Score: {docAgent?.raw_metric_score ?? docAgent?.forgery_score ?? 0.05}
+                </span>
+              </div>
+
+              <div className="mt-3 space-y-2 text-[11px] font-mono">
+                <div className="flex justify-between text-slate-400">
+                  <span>Laplacian Sharpness:</span>
+                  <span className="text-slate-200">
+                    {docAgent?.signals?.laplacian_variance_ratio ?? docAgent?.details?.sharpness_variance?.toFixed(1) ?? "48.8"}x
+                  </span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>Max Font Baseline Jitter:</span>
+                  <span className="text-slate-200">
+                    {docAgent?.signals?.max_font_baseline_jitter_px ?? docAgent?.signals?.max_baseline_jitter_px ?? docAgent?.details?.kerning_jitter_cv?.toFixed(2) ?? "0.0"} px
+                  </span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>ELA Regional Max Diff:</span>
+                  <span className="text-slate-200">
+                    {docAgent?.signals?.ela_max_patch_diff ?? docAgent?.signals?.ela_regional_max_diff ?? docAgent?.details?.ela_mean_diff?.toFixed(2) ?? "1.407"}
+                  </span>
+                </div>
+
+                {docAgent?.flags && docAgent.flags.length > 0 && (
+                  <div className="mt-2 p-2 rounded-lg bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[10px]">
+                    {docAgent.flags.map((f, i) => (
+                      <div key={i}>⚠️ {f}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </TiltCard>
+
+            {/* Supporting Agent 2: Behavioral Trust (Motor Telemetry) */}
+            <TiltCard glowColor="emerald" className="p-5 rounded-2xl border border-[#2b144d] bg-[#0c051a]/95">
+              <div className="flex items-center justify-between pb-3 border-b border-[#2b144d]/70">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-950/80 border border-emerald-800/80 flex items-center justify-center text-emerald-400">
+                    <Fingerprint className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-white font-heading">
+                      BehavioralTrustAgent
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-400 block -mt-0.5">25% Weight</span>
+                  </div>
+                </div>
+                <span className="text-[11px] font-mono font-semibold text-emerald-400">
+                  Trust: {behAgent?.raw_metric_score ?? behAgent?.trust_score ?? 0.97}
+                </span>
+              </div>
+
+              <div className="mt-3 space-y-2 text-[11px] font-mono">
+                <div className="flex justify-between text-slate-400">
+                  <span>Keystroke Rhythm CV:</span>
+                  <span className="text-slate-200">
+                    {behAgent?.signals?.typing_coef_variation ?? behAgent?.details?.keystroke_cv?.toFixed(2) ?? "0.22"} (Organic)
+                  </span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>Shannon Mouse Entropy:</span>
+                  <span className="text-slate-200">
+                    {behAgent?.signals?.mouse_entropy_bits ?? behAgent?.details?.mouse_entropy?.toFixed(2) ?? "2.52"} bits
+                  </span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>Active Session Window:</span>
+                  <span className="text-emerald-400">
+                    {behAgent?.signals?.session_duration_sec ?? "34.2"}s
+                  </span>
+                </div>
+
+                {behAgent?.flags && behAgent.flags.length > 0 && (
+                  <div className="mt-2 p-2 rounded-lg bg-rose-950/40 border border-rose-800/60 text-rose-300 text-[10px]">
+                    {behAgent.flags.map((f, i) => (
+                      <div key={i}>⚠️ {f}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </TiltCard>
+          </div>
         </div>
       </div>
 

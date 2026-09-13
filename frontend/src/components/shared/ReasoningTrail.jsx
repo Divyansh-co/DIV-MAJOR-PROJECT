@@ -76,18 +76,84 @@ export default function ReasoningTrail({ reasoningTrail, agentBreakdown, verdict
               <div className="space-y-3 font-mono text-xs">
                 {lines.length > 0 ? (
                   lines.map((line, idx) => {
-                    const isAlert = line.includes("FLAG") || line.includes("REJECT") || line.includes("TAMPER") || line.includes("DEEPFAKE");
-                    const isSuccess = line.includes("VERIFIED") || line.includes("PASS") || line.includes("AUTHENTIC");
+                    // Precise line classification driven by actual agent state
+                    const isDocHeader = line.includes("1. DOCUMENT FORGERY AGENT");
+                    const isLiveHeader = line.includes("2. LIVENESS & DEEPFAKE AGENT");
+                    const isBehHeader = line.includes("3. BEHAVIORAL TRUST AGENT");
+                    const isConsensusHeader = line.includes("4. CONSENSUS SYNTHESIS");
+
+                    let classification = "neutral";
+
+                    if (isLiveHeader) {
+                      const agent = agentBreakdown?.LivenessDeepfakeAgent;
+                      let isPass = true;
+                      if (agent) {
+                        isPass = agent.is_authentic ?? (agent.raw_metric_score < 0.40 && (!agent.flags || agent.flags.length === 0));
+                      } else {
+                        const nextStatus = lines.slice(idx, idx + 4).find((l) => l.includes("Status:"));
+                        if (nextStatus) isPass = nextStatus.includes("PASS");
+                      }
+                      classification = isPass ? "success" : "alert";
+                    } else if (isDocHeader) {
+                      const agent = agentBreakdown?.DocumentForgeryAgent;
+                      let isPass = true;
+                      if (agent) {
+                        isPass = agent.is_authentic ?? (agent.raw_metric_score < 0.35 && (!agent.flags || agent.flags.length === 0));
+                      } else {
+                        const nextStatus = lines.slice(idx, idx + 4).find((l) => l.includes("Status:"));
+                        if (nextStatus) isPass = nextStatus.includes("PASS");
+                      }
+                      classification = isPass ? "success" : "alert";
+                    } else if (isBehHeader) {
+                      const agent = agentBreakdown?.BehavioralTrustAgent;
+                      let isPass = true;
+                      if (agent) {
+                        isPass = agent.is_authentic ?? (agent.raw_metric_score >= 0.70 && (!agent.flags || agent.flags.length === 0));
+                      } else {
+                        const nextStatus = lines.slice(idx, idx + 4).find((l) => l.includes("Status:"));
+                        if (nextStatus) isPass = nextStatus.includes("PASS");
+                      }
+                      classification = isPass ? "success" : "alert";
+                    } else if (isConsensusHeader) {
+                      classification = verdict === "VERIFIED" ? "success" : verdict === "FLAGGED" ? "warning" : "alert";
+                    } else if (
+                      line.startsWith("[!]") ||
+                      line.includes("CRITICAL:") ||
+                      line.includes("Status: REJECTED") ||
+                      line.includes("FRAUD_REJECTION")
+                    ) {
+                      classification = "alert";
+                    } else if (
+                      line.includes("Status: FLAGGED") ||
+                      line.includes("WARNING:") ||
+                      (line.includes("FINAL DECISION: [FLAGGED]"))
+                    ) {
+                      classification = "warning";
+                    } else if (
+                      line.includes("Status: PASS") ||
+                      line.includes("Identified Anomalies: None") ||
+                      line.includes("FINAL DECISION: [VERIFIED]") ||
+                      line.includes("UNANIMOUS_CONSENSUS") ||
+                      line.includes("meets Institutional AAA")
+                    ) {
+                      classification = "success";
+                    }
+
+                    const isAlert = classification === "alert";
+                    const isWarning = classification === "warning";
+                    const isSuccess = classification === "success";
 
                     return (
                       <motion.div
                         key={idx}
                         initial={{ opacity: 0, x: -6 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.04 }}
+                        transition={{ delay: idx * 0.03 }}
                         className={`flex items-start gap-3 p-2.5 rounded-lg border ${
                           isAlert
                             ? "bg-rose-950/20 border-rose-900/40 text-rose-300"
+                            : isWarning
+                            ? "bg-amber-950/20 border-amber-900/40 text-amber-300"
                             : isSuccess
                             ? "bg-emerald-950/20 border-emerald-900/40 text-emerald-300"
                             : "bg-[#0E1B30]/60 border-[#1E2A44]/60 text-slate-300"
@@ -96,10 +162,12 @@ export default function ReasoningTrail({ reasoningTrail, agentBreakdown, verdict
                         <span className="mt-0.5 shrink-0">
                           {isAlert ? (
                             <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                          ) : isWarning ? (
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
                           ) : isSuccess ? (
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                           ) : (
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 inline-block mt-1" />
+                            <span className="w-2 h-2 rounded-full bg-cyan-400/80 inline-block mt-1" />
                           )}
                         </span>
                         <div className="flex-1 font-light leading-relaxed">

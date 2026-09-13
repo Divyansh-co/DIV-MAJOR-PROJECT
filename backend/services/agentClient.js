@@ -79,7 +79,13 @@ class AgentClient {
           risk_level: isForgery ? "CRITICAL" : "LOW",
           signals: {
             mrz_checksum_valid: !isForgery,
-            font_kerning_anomaly_score: isForgery ? 0.88 : 0.04
+            font_kerning_anomaly_score: isForgery ? 0.88 : 0.04,
+            laplacian_variance_ratio: isForgery ? 142.5 : 49.2,
+            max_font_baseline_jitter_px: isForgery ? 8.4 : 0.0,
+            max_baseline_jitter_px: isForgery ? 8.4 : 0.0,
+            ela_max_patch_diff: isForgery ? 2.84 : 1.392,
+            ela_regional_max_diff: isForgery ? 2.84 : 1.392,
+            ela_discrepancy_ratio: isForgery ? 118.0 : 1.4
           },
           summary: isForgery
             ? "Detected font-kerning anomaly and mismatched MRZ checksum."

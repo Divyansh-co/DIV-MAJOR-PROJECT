@@ -362,6 +362,7 @@ class DocumentForgeryAgent(BaseAgent):
 
         signals = {
             "max_font_baseline_jitter_px": round(max_line_jitter, 2),
+            "max_baseline_jitter_px": round(max_line_jitter, 2),
             "characters_detected": len(char_boxes),
         }
         return score, flags, signals
@@ -466,8 +467,11 @@ class DocumentForgeryAgent(BaseAgent):
 
         signals = {
             "ela_max_patch_diff": round(max_patch_ela, 3),
+            "ela_regional_max_diff": round(max_patch_ela, 3),
+            "ela_max_error": round(max_patch_ela, 3),
             "ela_patch_std_dev": round(std_ela, 3),
             "ela_discrepancy_ratio": round(ela_ratio, 1),
+            "ela_quadrant_ratio": round(ela_ratio, 1),
         }
         return score, flags, signals
 
