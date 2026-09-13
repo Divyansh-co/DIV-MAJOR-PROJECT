@@ -10,6 +10,7 @@ import ResultView from "./views/ResultView";
 import HistoryView from "./views/HistoryView";
 import CredentialView from "./views/CredentialView";
 import ErrorCard from "./components/common/ErrorCard";
+import Watermark from "./components/common/Watermark";
 import {
   verifyIdentity,
   getVerificationHistory,
@@ -244,6 +245,9 @@ export default function App() {
 
       {/* 6. Institutional Security Posture Footer */}
       <Footer />
+
+      {/* 7. Persistent Academic Watermark */}
+      <Watermark />
     </div>
   );
 }

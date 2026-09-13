@@ -1,4 +1,9 @@
 # VeriTrust AI — Multi-Agent Deepfake & Synthetic Identity KYC Verification
+### 🎓 Major Project by Divyansh Mishra
+
+[![Major Project](https://img.shields.io/badge/Major%20Project-Divyansh%20Mishra-00E5FF?style=for-the-badge&logo=github&logoColor=black)](https://github.com/Divyansh-co/DIV-MAJOR-PROJECT)
+[![Consensus](https://img.shields.io/badge/Consensus-v1.2%20Tri--Agent-10B981?style=for-the-badge)]()
+[![Blockchain](https://img.shields.io/badge/Audit%20Ledger-Ethereum%20Solidity-6366F1?style=for-the-badge&logo=ethereum&logoColor=white)]()
 
 An institutional-grade verification platform combining autonomous multi-modal AI agents with on-chain Ethereum audit anchoring. Designed to detect generative AI deepfakes, synthetic identities, and forged documents in automated KYC pipelines without storing raw PII on-chain.
 
@@ -173,3 +178,14 @@ Upon passing verification (`VERIFIED`), the gateway issues an HMAC-SHA256 signed
 | **Marcus Cole** | `analyst@apexbank.com` | `password123` | Risk Analyst | Apex Global Bank |
 
 *Switch accounts using the top-right profile switcher in the frontend navigation to observe per-user audit ledger isolation.*
+
+---
+
+## 7. Author & Academic Credits
+
+**VeriTrust AI — Major Project**
+- **Lead Developer**: **Divyansh Mishra**
+- **GitHub**: [@Divyansh-co](https://github.com/Divyansh-co)
+- **Project Repository**: [https://github.com/Divyansh-co/DIV-MAJOR-PROJECT](https://github.com/Divyansh-co/DIV-MAJOR-PROJECT)
+- **Key Technical Areas**: Multi-Agent Orchestration, Computer Vision Forensic Steganography (OpenCV/FFT/Laplacian), Biometric Deepfake Liveness (YuNet ONNX), Biomechanical Behavioral Telemetry (Shannon Entropy), Zero-PII EVM Smart Contracts (Solidity/Hardhat).
+

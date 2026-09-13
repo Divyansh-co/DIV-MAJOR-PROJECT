@@ -62,9 +62,14 @@ export default function Header({
               <span className="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/80 uppercase">
                 Consensus v1.2
               </span>
+              <span className="hidden lg:inline-flex items-center gap-1 text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 uppercase">
+                Major Project • Divyansh Mishra
+              </span>
             </div>
-            <div className="text-[10px] font-mono text-slate-400 -mt-0.5 hidden sm:block">
-              Multi-Agent Deepfake & On-Chain KYC
+            <div className="text-[10px] font-mono text-slate-400 -mt-0.5 hidden sm:flex items-center gap-2">
+              <span>Multi-Agent Deepfake & On-Chain KYC</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-cyan-400/90 font-semibold">Major Project: Divyansh Mishra</span>
             </div>
           </div>
         </div>
